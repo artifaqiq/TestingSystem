@@ -52,7 +52,7 @@
     font-size: 34px;
     font-weight: 700;
     letter-spacing: 2px;
-    color: #ED2553;
+    color: #279BE4;
     position: relative;
 }
 
@@ -63,7 +63,7 @@
     position: absolute;
     top: 0;
     left: -50px;
-    background: #ED2553;
+    background: #279BE4;
 }
 
 .input,
@@ -145,7 +145,7 @@
 }
 
 .input .spin {
-    background: #ED2553;
+    background: #279BE4;
     z-index: 4;
     width: 0;
 }
@@ -194,7 +194,7 @@
 
 .button button {
     background-color: #fff;
-    color: #ED2553;
+    color: #279BE4;
     border: none;
 }
 
@@ -253,7 +253,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background: #ED2553;
+    background: #279BE4;
     border-radius: 50%;
 }
 

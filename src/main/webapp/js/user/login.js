@@ -7,8 +7,8 @@ $(function () {
 
     $('*').on('input change', function () {
         if (validator.isButtonAvailable()) {
-            $("#reg-spn").css("color", "#ED2553");
-            $("#reg-btn").css("border-color", "#ED2553");
+            $("#reg-spn").css("color", "#279BE4");
+            $("#reg-btn").css("border-color", "#279BE4");
         } else {
             $("#reg-spn").css("color", "rgba(0, 0, 0, 0.2)");
             $("#reg-btn").css("border-color", "rgba(0, 0, 0, 0.2)");
