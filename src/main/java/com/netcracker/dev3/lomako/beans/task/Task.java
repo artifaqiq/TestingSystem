@@ -30,7 +30,7 @@ public class Task implements Serializable {
 
     private int pointsForCorrectAnswer;
 
-    private Answer correctAnswer;
+    private List<Answer> correctAnswers;
 
     private List<AnswerOption> options;
 
@@ -46,32 +46,32 @@ public class Task implements Serializable {
      *
      * @param text                   text which describes task
      * @param pointsForCorrectAnswer number of points that get user for correct answer on this task
-     * @param correctAnswer          correct answer to this task
+     * @param correctAnswers         correct answer to this task
      * @param options                list of options for this task
      */
     public Task(long id, long testId, int order, String text, int pointsForCorrectAnswer,
-                Answer correctAnswer, List<AnswerOption> options) {
+                List<Answer> correctAnswers, List<AnswerOption> options) {
         this.id = id;
         this.testId = testId;
         this.order = order;
         this.text = text;
         this.pointsForCorrectAnswer = pointsForCorrectAnswer;
-        this.correctAnswer = correctAnswer;
+        this.correctAnswers = correctAnswers;
         this.options = options;
     }
 
     /**
      * @return the correct answer for this task
      */
-    public Answer getCorrectAnswer() {
-        return correctAnswer;
+    public List<Answer> getCorrectAnswers() {
+        return correctAnswers;
     }
 
     /**
-     * @param correctAnswer correct answer for this task to set
+     * @param correctAnswers correct answer for this task to set
      */
-    public void setCorrectAnswer(Answer correctAnswer) {
-        this.correctAnswer = correctAnswer;
+    public void setCorrectAnswers(List<Answer> correctAnswers) {
+        this.correctAnswers = correctAnswers;
     }
 
     /**
@@ -158,7 +158,7 @@ public class Task implements Serializable {
         if (order != task.order) return false;
         if (pointsForCorrectAnswer != task.pointsForCorrectAnswer) return false;
         if (text != null ? !text.equals(task.text) : task.text != null) return false;
-        if (correctAnswer != null ? !correctAnswer.equals(task.correctAnswer) : task.correctAnswer != null)
+        if (correctAnswers != null ? !correctAnswers.equals(task.correctAnswers) : task.correctAnswers != null)
             return false;
         return options != null ? options.equals(task.options) : task.options == null;
     }
@@ -173,7 +173,7 @@ public class Task implements Serializable {
         result = 31 * result + order;
         result = 31 * result + (text != null ? text.hashCode() : 0);
         result = 31 * result + pointsForCorrectAnswer;
-        result = 31 * result + (correctAnswer != null ? correctAnswer.hashCode() : 0);
+        result = 31 * result + (correctAnswers != null ? correctAnswers.hashCode() : 0);
         result = 31 * result + (options != null ? options.hashCode() : 0);
         return result;
     }
@@ -191,7 +191,7 @@ public class Task implements Serializable {
                 ", order=" + order +
                 ", text='" + text + '\'' +
                 ", pointsForCorrectAnswer=" + pointsForCorrectAnswer +
-                ", correctAnswer=" + correctAnswer +
+                ", correctAnswers=" + correctAnswers +
                 ", options=" + options +
                 '}';
     }
