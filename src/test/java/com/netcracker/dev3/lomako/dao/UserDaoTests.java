@@ -6,7 +6,7 @@ package com.netcracker.dev3.lomako.dao;
 import com.netcracker.dev3.lomako.beans.user.Role;
 import com.netcracker.dev3.lomako.beans.user.User;
 import com.netcracker.dev3.lomako.dao.user.UserDao;
-import com.netcracker.dev3.lomako.dao.user.impl.UserDaoImpl;
+import com.netcracker.dev3.lomako.dao.user.UserDaoImpl;
 import com.netcracker.dev3.lomako.exceptions.dao.PersistException;
 import com.netcracker.dev3.lomako.utils.PasswordCryptography;
 import org.junit.Test;
@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
  */
 public class UserDaoTests {
 
-    private UserDao userDao = UserDaoImpl.getInstance();
+    private static UserDao userDao = UserDaoImpl.getInstance();
 
     @Test
     public void save() throws SQLException {
@@ -46,6 +46,8 @@ public class UserDaoTests {
         } catch (PersistException e) {
             System.out.println(e.getMessage());
         }
+
+        System.out.println("Save user: " + testUser);
 
     }
 
@@ -77,15 +79,19 @@ public class UserDaoTests {
         assertEquals(findedUser.getLastName(), lastName);
         assertEquals(findedUser.getRole(), role);
 
+        System.out.println("Updated user: " + findedUser);
+
     }
 
     @Test
     public void findAll() throws SQLException {
         List<User> users = (List<User>) userDao.findAll();
 
-        System.out.println(users);
-
         assertNotNull(users);
+
+        for (User user : users) {
+            System.out.println(user);
+        }
     }
 
     @Test
@@ -95,21 +101,22 @@ public class UserDaoTests {
 
         User user1 = userDao.findOne(users.get(index).getId());
 
-        System.out.println("Id = " + users.get(index).getId());
-        System.out.println(user1);
-
         assertTrue(user1.toString().equals(users.get(index).toString()));
 
         User user2 = userDao.findOne(2145245235L);
         assertNull(user2);
+
+        System.out.println("Id = " + users.get(index).getId());
+        System.out.println(user1);
     }
 
     @Test
     public void count() throws SQLException {
         List<User> users = (List<User>) userDao.findAll();
         long count = userDao.count();
-        System.out.println("count = " + count);
         assertEquals(users.size(), count);
+
+        System.out.println("count = " + count);
     }
 
     @Test
@@ -119,11 +126,12 @@ public class UserDaoTests {
 
         user.setId(3000);
         long id = user.getId();
-        System.out.println("id = " + id);
 
         userDao.delete(user);
 
         assertNull(userDao.findOne(id));
+
+        System.out.println("id = " + id);
     }
 
     @Test
@@ -144,11 +152,11 @@ public class UserDaoTests {
         final String notExistsEmail = "test" + new Random().nextInt() + "@example.com";
         User user2 = userDao.findByEmail(existsEmail);
 
-        System.out.println("user1 = " + user1);
-        System.out.println("user2 = " + user2);
-
         assertEquals(user1.toString(), user2.toString());
         assertNull(userDao.findByEmail(notExistsEmail));
+
+        System.out.println("user1 = " + user1);
+        System.out.println("user2 = " + user2);
 
     }
 
