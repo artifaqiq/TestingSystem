@@ -3,11 +3,14 @@
  */
 package com.netcracker.dev3.lomako.beans.user;
 
+import java.io.Serializable;
+
 /**
  * @author Lomako
  * @version 1.0
  */
-public enum Role {
+public enum Role implements Serializable {
+
     USER, ADMIN;
 
     public int getIdInRolesTable() {
