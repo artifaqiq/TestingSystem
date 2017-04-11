@@ -28,7 +28,6 @@ public class AnswerOptionDaoTests {
 
     private static AnswerOptionDao answerOptionDao = AnswerOptionDaoImpl.getInstance();
 
-
     @Test
     public void save() throws SQLException, PersistException {
         AnswerOption answerOption = new AnswerOption();
@@ -60,7 +59,7 @@ public class AnswerOptionDaoTests {
 
         assertEquals(answerOptionDao.findOne(answerOption.getId()).getText(), answerOption.getText());
 
-        System.out.println("updated task = " + answerOption);
+        System.out.println("updated answer = " + answerOption);
 
     }
 

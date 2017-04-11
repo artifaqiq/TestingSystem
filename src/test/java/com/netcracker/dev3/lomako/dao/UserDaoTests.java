@@ -106,7 +106,7 @@ public class UserDaoTests {
         User user2 = userDao.findOne(2145245235L);
         assertNull(user2);
 
-        System.out.println("Id = " + users.get(index).getId());
+        System.out.println("Id = "+ users.get(index).getId());
         System.out.println(user1);
     }
 
@@ -117,6 +117,7 @@ public class UserDaoTests {
         assertEquals(users.size(), count);
 
         System.out.println("count = " + count);
+
     }
 
     @Test
