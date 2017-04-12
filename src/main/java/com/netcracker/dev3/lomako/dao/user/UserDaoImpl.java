@@ -6,7 +6,7 @@ package com.netcracker.dev3.lomako.dao.user;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import com.netcracker.dev3.lomako.beans.user.Role;
 import com.netcracker.dev3.lomako.beans.user.User;
-import com.netcracker.dev3.lomako.exceptions.dao.EmailConflictException;
+import com.netcracker.dev3.lomako.exceptions.dao.UserEmailUniqueConflictException;
 import com.netcracker.dev3.lomako.exceptions.dao.PersistException;
 import com.netcracker.dev3.lomako.utils.ConnectionPool;
 import com.netcracker.dev3.lomako.utils.Logger;
@@ -80,7 +80,7 @@ public enum  UserDaoImpl implements UserDao {
                     throw e;
                 }
             } catch (MySQLIntegrityConstraintViolationException e) {
-                throw new EmailConflictException("User with some email already exists");
+                throw new UserEmailUniqueConflictException("User with some email already exists");
             }
 
         } catch (SQLException e) {
@@ -110,7 +110,7 @@ public enum  UserDaoImpl implements UserDao {
                     throw e;
                 }
             } catch (MySQLIntegrityConstraintViolationException e) {
-                throw new EmailConflictException("User with some email already exists");
+                throw new UserEmailUniqueConflictException("User with some email already exists");
             }
 
         } catch (SQLException e) {
