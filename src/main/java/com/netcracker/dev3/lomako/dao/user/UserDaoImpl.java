@@ -6,8 +6,8 @@ package com.netcracker.dev3.lomako.dao.user;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import com.netcracker.dev3.lomako.beans.user.Role;
 import com.netcracker.dev3.lomako.beans.user.User;
-import com.netcracker.dev3.lomako.exceptions.dao.UserEmailUniqueConflictException;
 import com.netcracker.dev3.lomako.exceptions.dao.PersistException;
+import com.netcracker.dev3.lomako.exceptions.dao.UserEmailUniqueConflictException;
 import com.netcracker.dev3.lomako.utils.ConnectionPool;
 import com.netcracker.dev3.lomako.utils.Logger;
 

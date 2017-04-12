@@ -4,7 +4,6 @@
 package com.netcracker.dev3.lomako.beans.answer;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * This class describes entity <b>Answer</b>
