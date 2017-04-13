@@ -24,7 +24,7 @@ public enum ConnectionPool {
 
     static {
         PoolProperties p = new PoolProperties();
-        p.setUrl("jdbc:mysql://localhost:3306/testing_system");
+        p.setUrl("jdbc:mysql://localhost:3306/testing_system?useUnicode=true&characterEncoding=UTF-8");
         p.setDriverClassName("com.mysql.jdbc.Driver");
         p.setUsername("dev3_lomako");
         p.setPassword("ZserdXCftygV");

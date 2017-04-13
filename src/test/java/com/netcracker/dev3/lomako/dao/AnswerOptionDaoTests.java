@@ -113,7 +113,7 @@ public class AnswerOptionDaoTests {
         List<AnswerOption> answerOptions = (List<AnswerOption>)answerOptionDao.findAll();
         AnswerOption answerOption = answerOptions.get(Math.abs(new Random().nextInt() % answerOptions.size()));
 
-        assertTrue(taskDao.exists(answerOption.getId()));
+        assertTrue(answerOptionDao.exists(answerOption.getId()));
 
         System.out.println("exists: id = " + answerOption.getId());
     }

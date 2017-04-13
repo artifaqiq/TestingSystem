@@ -27,7 +27,7 @@ public class TagDaoTests {
     @Test(expected = TagTitleUniqueConflictException.class)
     public void save() throws SQLException, PersistException {
 
-        final String title = "Tag#" + new Random().nextInt();
+        final String title = "Таг#" + new Random().nextInt();
 
         Tag testTag = new Tag();
         testTag.setTitle(title);
@@ -96,7 +96,7 @@ public class TagDaoTests {
     public void delete() throws SQLException {
         List<Tag> tags = (List<Tag>)tagDao.findAll();
         Tag tag = tags.get(Math.abs(new Random().nextInt()) % tags.size());
-
+        
         tagDao.delete(tag);
 
         assertNull(tagDao.findOne(tag.getId()));

@@ -100,7 +100,7 @@ public class TaskDaoTests {
 
         taskDao.delete(task);
 
-        assertNull(testDao.findOne(task.getId()));
+        assertNull(taskDao.findOne(task.getId()));
 
         System.out.println("Delete " + task.getId());
     }

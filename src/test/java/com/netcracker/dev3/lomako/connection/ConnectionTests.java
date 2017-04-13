@@ -8,6 +8,7 @@ import org.apache.tomcat.jdbc.pool.PoolExhaustedException;
 import org.junit.Test;
 
 import javax.naming.NamingException;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 import static org.junit.Assert.assertNotEquals;
@@ -18,17 +19,21 @@ import static org.junit.Assert.assertNotEquals;
  */
 public class ConnectionTests {
 
-    private ConnectionPool connectionPool = ConnectionPool.getInstance();
+    private final ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-    @Test(expected = PoolExhaustedException.class)
-    public void connectionPool() throws SQLException, NamingException {
-
-        for (int i = 0; i < 150; i++) {
-
-            System.out.printf("[%d] %s\n", i, connectionPool.getConnection());
-            assertNotEquals(i, 100);
-
+    @Test
+    public void returningToPool() throws SQLException, NamingException {
+        for (int i = 0; i < 100; i++) {
+            Connection connection = connectionPool.getConnection();
+            connection.close();
         }
+
+        for (int i = 0; i < 100; i++) {
+            Connection connection = connectionPool.getConnection();
+            connection.close();
+        }
+
+
     }
 
 }

@@ -9,7 +9,7 @@
 
     <servlet>
         <servlet-name>Controller</servlet-name>
-        <servlet-class>com.netcracker.dev3.lomako.controller.Controller</servlet-class>
+        <servlet-class>com.netcracker.dev3.lomako.controllers.Controller</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -19,7 +19,7 @@
 
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/Controller</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
