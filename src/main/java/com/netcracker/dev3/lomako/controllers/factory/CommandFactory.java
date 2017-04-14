@@ -7,7 +7,7 @@ import com.netcracker.dev3.lomako.controllers.commands.Command;
 import com.netcracker.dev3.lomako.controllers.commands.dashboard.MainCommand;
 import com.netcracker.dev3.lomako.controllers.commands.user.LoginCommand;
 import com.netcracker.dev3.lomako.controllers.commands.user.RegisterCommand;
-import com.netcracker.dev3.lomako.controllers.commands.user.SignOutCommand;
+import com.netcracker.dev3.lomako.controllers.commands.user.LogOutCommand;
 import com.netcracker.dev3.lomako.controllers.commands.welcome.WelcomeCommand;
 import com.netcracker.dev3.lomako.controllers.enums.CommandName;
 
@@ -36,8 +36,8 @@ public enum CommandFactory  {
             case REGISTER:
                 command = new RegisterCommand();
                 break;
-            case SIGN_OUT:
-                command = new SignOutCommand();
+            case LOGOUT:
+                command = new LogOutCommand();
                 break;
             case NEWS:
                 command = new MainCommand();

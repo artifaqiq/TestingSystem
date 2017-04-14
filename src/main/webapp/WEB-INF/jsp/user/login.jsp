@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.netcracker.dev3.lomako.constants.CommandPath" %><%--
   Created by Artur Lomako
 --%>
 
@@ -50,6 +50,10 @@
         </div>
 
     </div>
+
+    <a href="<%= CommandPath.REGISTER %>">
+        ${tr.translate("register")}
+    </a>
 
 </div>
 </body>

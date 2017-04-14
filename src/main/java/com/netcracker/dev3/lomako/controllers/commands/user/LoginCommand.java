@@ -19,32 +19,16 @@ import javax.servlet.http.HttpSession;
  * @author Lomako
  * @version 1.0
  */
-public class LoginCommand implements Command {
+public final class LoginCommand extends Command {
     private static final UserDao userDao = UserDaoImpl.getInstance();
 
-    private Translator translator;
-
     @Override
-    public String execute(HttpServletRequest req) throws Exception {
-
-        final String locale = (String) req.getSession().getAttribute("locale");
-        translator = new Translator(I10nResource.USER, locale);
-        req.setAttribute("tr", translator);
-
-        if ("POST".equals(req.getMethod())) {
-            return executePost(req);
-        } else if ("GET".equals(req.getMethod())) {
-            return executeGet(req);
-        } else {
-            return JspPath.LOGIN;
-        }
-    }
-
-    private String executeGet(HttpServletRequest req) {
+    protected String executeGet(HttpServletRequest req) {
         return JspPath.LOGIN;
     }
 
-    private String executePost(HttpServletRequest req) throws Exception {
+    @Override
+    protected String executePost(HttpServletRequest req) throws Exception {
         final String email = req.getParameter("email");
         final String password = req.getParameter("password");
 
@@ -58,8 +42,6 @@ public class LoginCommand implements Command {
             setSessionUserAttributes(user, req.getSession());
             return JspPath.MAIN;
         }
-
-
     }
 
     private static void setSessionUserAttributes(User user, HttpSession session) {

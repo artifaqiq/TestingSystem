@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.netcracker.dev3.lomako.constants.CommandPath" %><%--
   Created by Artur Lomako
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -26,8 +26,16 @@
                 <ul>
                     <li class="nav-profile">
                         <div class="nav-profile-image">
-                            <img src="https://pp.userapi.com/c836122/v836122581/2c2b6/SihyjLjqz0k.jpg" alt="profile-img" alt="profile image">
-                            <div class="nav-profile-name">Artur Lomako<i class="fa fa-caret-down"></i></div>
+                            <div class="nav-profile-name">
+                                <%= pageContext.getSession().getAttribute("firstName") + " " + pageContext.getSession().getAttribute("lastName")%>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-profile">
+                        <div class="nav-profile-name">
+                            <a href="<%= CommandPath.LOGOUT %>">
+                                ${tr.translate("logout")}
+                            </a>
                         </div>
                     </li>
                 </ul>

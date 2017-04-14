@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2017, Lomako. All rights reserved.
  */
-package com.netcracker.dev3.lomako.controllers.commands.dashboard;
+package com.netcracker.dev3.lomako.controllers.commands.test;
 
 import com.netcracker.dev3.lomako.constants.I10nResource;
 import com.netcracker.dev3.lomako.constants.JspPath;
@@ -14,15 +14,17 @@ import javax.servlet.http.HttpServletRequest;
  * @author Lomako
  * @version 1.0
  */
-public final class MainCommand extends Command {
+public final class CreatingTest extends Command {
 
     @Override
-    protected String executeGet(HttpServletRequest request) throws Exception {
-        return JspPath.MAIN;
+    protected String executeGet(HttpServletRequest req) {
+        return null;
     }
 
     @Override
-    protected String executePost(HttpServletRequest request) throws Exception {
-        return "/";
+    protected String executePost(HttpServletRequest req) {
+        return null;
     }
+
+
 }

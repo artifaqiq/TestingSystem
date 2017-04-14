@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.netcracker.dev3.lomako.constants.CommandPath" %><%--
   Created by Artur Lomako
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -9,12 +9,12 @@
 
     <jsp:include page="/WEB-INF/jsp/templates/head.jsp"/>
 
-    <script src=/static/js/lib/jquery-3.2.0.min.js"></script>
+    <script src="/static/js/lib/jquery-3.2.0.min.js"></script>
     <script src="/static/js/lib/jquery.complexify.min.js"></script>
 
-    <link href= "/static/css/user/login-register.css" rel="stylesheet">
-    <script src= "/static/js/user/login-register.js"></script>
-    <script src= "/static/js/user/register.js"></script>
+    <link href="/static/css/user/login-register.css" rel="stylesheet">
+    <script src="/static/js/user/login-register.js"></script>
+    <script src="/static/js/user/register.js"></script>
 </head>
 <body>
 <div class="materialContainer">
@@ -63,6 +63,10 @@
             <button id="reg-btn"><span id="reg-spn">${tr.translate("register")}</span></button>
         </div>
     </div>
+
+    <a href="<%= CommandPath.LOGIN %>">
+        ${tr.translate("login")}
+    </a>
 
 </div>
 </body>

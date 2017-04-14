@@ -10,7 +10,7 @@ package com.netcracker.dev3.lomako.controllers.enums;
 public enum CommandName {
     WELCOME,
     LOGIN,
-    SIGN_OUT,
+    LOGOUT,
     REGISTER,
     NEWS
 

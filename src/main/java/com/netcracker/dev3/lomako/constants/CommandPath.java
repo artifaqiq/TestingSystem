@@ -9,4 +9,8 @@ package com.netcracker.dev3.lomako.constants;
  */
 public final class CommandPath {
     public static final String MAIN = "/Controller?command=main";
+
+    public static final String LOGIN = "/Controller?command=login";
+    public static final String REGISTER = "/Controller?command=register";
+    public static final String LOGOUT = "/Controller?command=logout";
 }
