@@ -19,16 +19,11 @@ public class TranslatorTests {
 
     @Test
     public void translate() {
-        final Translator translator = Translator.getInstance();
+        final Translator translator1 = new Translator(I10nResource.USER, null);
+        final Translator translator2 = new Translator(I10nResource.USER, Language.RU);
 
-        assertEquals(translator.translate(I10nResource.USER, "login", new Locale(Language.EN)),
-                "sign in");
-        assertEquals(translator.translate(I10nResource.USER, "logout", new Locale(Language.EN)),
-                "log out");
-        assertEquals(translator.translate(I10nResource.USER, "login", new Locale(Language.RU)),
-                "войти");
-        assertEquals(translator.translate(I10nResource.USER, "logout", new Locale(Language.RU)),
-                "выйти");
+        assertEquals(translator1.translate("login"), "sign in");
+        assertEquals(translator2.translate("login"), "войти");
 
 
     }

@@ -3,6 +3,9 @@
  */
 package com.netcracker.dev3.lomako.utils;
 
+import com.netcracker.dev3.lomako.constants.Language;
+import com.sun.istack.internal.Nullable;
+
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -10,13 +13,23 @@ import java.util.ResourceBundle;
  * @author Lomako
  * @version 1.0
  */
-public enum Translator {
-    INSTANCE;
+public final class Translator {
 
-    public String translate(String resourceBundle, String key, Locale locale) {
-        ResourceBundle bundle = ResourceBundle.getBundle(resourceBundle, locale, new Utf8Control());
+    private final ResourceBundle bundle;
+
+    public Translator(String resourceBundlePath, @Nullable String localeName) {
+        final Locale locale;
+        if (localeName == null) {
+            locale = new Locale(Language.RU);
+        } else {
+            locale = new Locale(localeName);
+        }
+
+        this.bundle = ResourceBundle.getBundle(resourceBundlePath, locale, new Utf8Control());
+    }
+
+    public String translate(String key) {
         return bundle.getString(key);
     }
 
-    public static Translator getInstance() { return INSTANCE; }
 }
