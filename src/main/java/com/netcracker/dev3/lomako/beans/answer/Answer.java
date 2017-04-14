@@ -17,7 +17,11 @@ public class Answer implements Serializable {
 
     private long id;
 
-    private int answer;
+    private int order;
+
+    private String text;
+
+    private boolean correct;
 
     private long taskId;
 
@@ -29,26 +33,37 @@ public class Answer implements Serializable {
     /**
      * Creates new entity of the class <b>{@code Answer}</b>
      *
-     * @param answer list of numbers of answer. Every number correspond with one answer option
      */
-    public Answer(long id, int answer, long taskId) {
+    public Answer(long id, int order, String text, boolean correct, long taskId) {
         this.id = id;
-        this.answer = answer;
+        this.order = order;
+        this.text = text;
+        this.correct = correct;
         this.taskId = taskId;
     }
 
-    /**
-     * @return answer value
-     * */
-    public int getAnswer() {
-        return answer;
+    public int getOrder() {
+        return order;
     }
 
-    /**
-     * @param answer answer value
-     * */
-    public void setAnswer(int answer) {
-        this.answer = answer;
+    public void setOrder(int order) {
+        this.order = order;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public boolean isCorrect() {
+        return correct;
+    }
+
+    public void setCorrect(boolean correct) {
+        this.correct = correct;
     }
 
     public static long getSerialVersionUID() {
@@ -81,11 +96,13 @@ public class Answer implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Answer)) return false;
 
-        Answer answer1 = (Answer) o;
+        Answer answer = (Answer) o;
 
-        if (id != answer1.id) return false;
-        if (answer != answer1.answer) return false;
-        return taskId == answer1.taskId;
+        if (id != answer.id) return false;
+        if (order != answer.order) return false;
+        if (correct != answer.correct) return false;
+        if (taskId != answer.taskId) return false;
+        return text.equals(answer.text);
     }
 
     /**
@@ -94,7 +111,9 @@ public class Answer implements Serializable {
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + answer;
+        result = 31 * result + order;
+        result = 31 * result + (text != null ? text.hashCode() : 0);
+        result = 31 * result + (correct ? 1 : 0);
         result = 31 * result + (int) (taskId ^ (taskId >>> 32));
         return result;
     }
@@ -108,7 +127,9 @@ public class Answer implements Serializable {
     public String toString() {
         return "Answer{" +
                 "id=" + id +
-                ", answer=" + answer +
+                ", order=" + order +
+                ", text=" + text +
+                ", correct=" + correct +
                 ", taskId=" + taskId +
                 '}';
     }

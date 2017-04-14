@@ -33,10 +33,11 @@ public class AnswerDaoTests {
         Answer answer = new Answer();
 
         final Task task = ((List<Task>)taskDao.findAll()).get(0);
-        final int value = Math.abs(new Random().nextInt() % 5);
 
         answer.setTaskId(task.getId());
-        answer.setAnswer(value);
+        answer.setCorrect(new Random().nextBoolean());
+        answer.setText("Answer#" + new Random().nextInt());
+        answer.setOrder(Math.abs(new Random().nextInt() % 10));
 
         answerDao.save(answer);
         answerDao.save(answer);
@@ -50,10 +51,10 @@ public class AnswerDaoTests {
         List<Answer> answers = (List<Answer>)answerDao.findAll();
         Answer answer = answers.get(Math.abs(new Random().nextInt()) % answers.size());
 
-        answer.setAnswer(answer.getAnswer() + 2);
+        answer.setOrder(answer.getOrder() + 2);
         answerDao.update(answer);
 
-        assertEquals(answerDao.findOne(answer.getId()).getAnswer(), answer.getAnswer());
+        assertEquals(answerDao.findOne(answer.getId()).getOrder(), answer.getOrder());
 
         System.out.println("updated answer = " + answer);
 

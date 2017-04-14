@@ -26,25 +26,25 @@ public enum  AnswerDaoImpl implements AnswerDao {
     private static ConnectionPool connectionPool = ConnectionPool.getInstance();
 
     private static final String INSERT_ANSWER_SQL =
-            "INSERT INTO correct_answers(answer, task_id) VALUES (?, ?)";
+            "INSERT INTO answers(`order`, text, is_correct, tasks_id) VALUES (?, ?, ?, ?)";
 
     private static final String UPDATE_ANSWER_SQL =
-            "UPDATE correct_answers SET answer = ?, task_id = ? WHERE id = ?";
+            "UPDATE answers SET `order` = ?, text = ?, is_correct = ?, tasks_id =?  WHERE id = ?";
 
     private static final String DELETE_ANSWER_BY_ID_SQL =
-            "DELETE FROM correct_answers WHERE id = ?";
+            "DELETE FROM answers WHERE id = ?";
 
     private static final String SELECT_ANSWER_BY_ID_SQL =
-            "SELECT id, answer, task_id FROM correct_answers WHERE id = ?";
+            "SELECT id, `order`, text, is_correct, tasks_id FROM answers WHERE id = ?";
 
     private static final String SELECT_ALL_ANSWERS_SQL =
-            "SELECT id, answer, task_id FROM correct_answers";
+            "SELECT id, `order`, text, is_correct, tasks_id FROM answers";
 
     private static final String COUNT_ALL_ANSWERS_SQL =
-            "SELECT COUNT(*) FROM correct_answers";
+            "SELECT COUNT(*) FROM answers";
 
     private static final String EXISTS_ANSWER_BY_ID_SQL =
-            "SELECT EXISTS(SELECT id FROM correct_answers WHERE id = ?);";
+            "SELECT EXISTS(SELECT id FROM answers WHERE id = ?);";
 
     @Override
     public <S extends Answer> void save(S entity) throws SQLException, PersistException {
@@ -52,8 +52,10 @@ public enum  AnswerDaoImpl implements AnswerDao {
 
             PreparedStatement insertAnswer = connection.prepareStatement(INSERT_ANSWER_SQL);
 
-            insertAnswer.setInt(1, entity.getAnswer());
-            insertAnswer.setLong(2, entity.getTaskId());
+            insertAnswer.setInt(1, entity.getOrder());
+            insertAnswer.setString(2, entity.getText());
+            insertAnswer.setBoolean(3, entity.isCorrect());
+            insertAnswer.setLong(4, entity.getTaskId());
 
             if (insertAnswer.executeUpdate() != 1) {
                 PersistException e = new PersistException("On save modify not 1 entity");
@@ -74,9 +76,11 @@ public enum  AnswerDaoImpl implements AnswerDao {
         try (Connection connection = connectionPool.getConnection()) {
 
             PreparedStatement updateAnswer = connection.prepareStatement(UPDATE_ANSWER_SQL);
-            updateAnswer.setInt(1, entity.getAnswer());
-            updateAnswer.setLong(2, entity.getTaskId());
-            updateAnswer.setLong(3, entity.getId());
+            updateAnswer.setInt(1, entity.getOrder());
+            updateAnswer.setString(2, entity.getText());
+            updateAnswer.setBoolean(3, entity.isCorrect());
+            updateAnswer.setLong(4, entity.getTaskId());
+            updateAnswer.setLong(5, entity.getId());
 
             if (updateAnswer.executeUpdate() != 1) {
                 PersistException e = new PersistException("On update modify not 1 entity");
@@ -124,8 +128,10 @@ public enum  AnswerDaoImpl implements AnswerDao {
             }
 
             answer.setId(resultSet.getLong(1));
-            answer.setAnswer(resultSet.getInt(2));
-            answer.setTaskId(resultSet.getLong(3));
+            answer.setOrder(resultSet.getInt(2));
+            answer.setText(resultSet.getString(3));
+            answer.setCorrect(resultSet.getBoolean(4));
+            answer.setTaskId(resultSet.getLong(5));
 
         } catch (SQLException e) {
             Logger.getInstance().error(
@@ -149,8 +155,10 @@ public enum  AnswerDaoImpl implements AnswerDao {
                 Answer answer = new Answer();
 
                 answer.setId(resultSet.getLong(1));
-                answer.setAnswer(resultSet.getInt(2));
-                answer.setTaskId(resultSet.getLong(3));
+                answer.setOrder(resultSet.getInt(2));
+                answer.setText(resultSet.getString(3));
+                answer.setCorrect(resultSet.getBoolean(4));
+                answer.setTaskId(resultSet.getLong(5));
 
                 answers.add(answer);
             }
