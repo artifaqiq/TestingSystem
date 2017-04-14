@@ -8,10 +8,10 @@ package com.netcracker.dev3.lomako.controllers.enums;
  * @version 1.0
  */
 public enum CommandName {
-    WELCOME,
     LOGIN,
     LOGOUT,
     REGISTER,
-    NEWS
+    MAIN,
+    CREATE_TEST
 
 }

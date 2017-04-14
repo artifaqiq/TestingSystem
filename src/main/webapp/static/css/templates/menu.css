@@ -28,10 +28,10 @@ a {
     background: #33373B;
     max-width: 210px;
     padding: 10px;
-    min-height: 44px;
+    min-height: 62px;
     background: #279BE4;
     width: 100%;
-    max-height: 44px;
+    max-height: 62px;
 }
 .white-label img {
     max-height: 43px;
@@ -146,7 +146,7 @@ div.user-image {
 }
 #sidebar-nav {
     width: 106%;
-    height: calc(100% - 95px);
+    height: calc(100% - 205px);
     padding: 0;
     background: #2A2D33;
     border-right: 1px solid #E0E0E0;
@@ -204,6 +204,15 @@ div.user-image {
     text-align: center;
 }
 #content {
+    float: left;
+    width: calc(100% - 210px);
+    height: 100%;
+    word-wrap: break-word;
+    background: #FFFFFF;
+    font-family: Raleway, sans-serif;
+}
+
+#content2 {
     float: left;
     width: calc(100% - 210px);
     height: 100%;

@@ -5,10 +5,10 @@ package com.netcracker.dev3.lomako.controllers.factory;
 
 import com.netcracker.dev3.lomako.controllers.commands.Command;
 import com.netcracker.dev3.lomako.controllers.commands.dashboard.MainCommand;
+import com.netcracker.dev3.lomako.controllers.commands.test.CreatingTest;
 import com.netcracker.dev3.lomako.controllers.commands.user.LoginCommand;
 import com.netcracker.dev3.lomako.controllers.commands.user.RegisterCommand;
 import com.netcracker.dev3.lomako.controllers.commands.user.LogOutCommand;
-import com.netcracker.dev3.lomako.controllers.commands.welcome.WelcomeCommand;
 import com.netcracker.dev3.lomako.controllers.enums.CommandName;
 
 /**
@@ -24,12 +24,9 @@ public enum CommandFactory  {
     }
 
     public Command getCommand(CommandName name) {
-        Command command = null;
+        Command command;
 
         switch (name) {
-            case WELCOME:
-                command = new WelcomeCommand();
-                break;
             case LOGIN:
                 command = new LoginCommand();
                 break;
@@ -39,8 +36,11 @@ public enum CommandFactory  {
             case LOGOUT:
                 command = new LogOutCommand();
                 break;
-            case NEWS:
+            case MAIN:
                 command = new MainCommand();
+                break;
+            case CREATE_TEST:
+                command = new CreatingTest();
                 break;
             default:
                 throw new IllegalArgumentException();

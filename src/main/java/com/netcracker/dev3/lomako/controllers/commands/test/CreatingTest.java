@@ -18,7 +18,7 @@ public final class CreatingTest extends Command {
 
     @Override
     protected String executeGet(HttpServletRequest req) {
-        return null;
+        return JspPath.CREATE_TEST;
     }
 
     @Override

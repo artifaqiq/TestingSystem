@@ -17,6 +17,9 @@ public final class JspPath {
     public static final String LOGIN = BASE_PATH + "/user/login.jsp";
     public static final String REGISTER = BASE_PATH + "/user/register.jsp";
 
+    /* Test */
+    public static final String CREATE_TEST = BASE_PATH + "/test/create.jsp";
+
     /* Error */
     public static final String ERROR_500 = BASE_PATH + "/error/500.jsp";
 

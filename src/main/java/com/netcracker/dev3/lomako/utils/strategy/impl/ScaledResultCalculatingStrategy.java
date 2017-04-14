@@ -28,17 +28,6 @@ public final class ScaledResultCalculatingStrategy implements ResultCalculationS
 
         int result = 0;
 
-        while (taskIterator.hasNext() && answerIterator.hasNext()) {
-            Task task = taskIterator.next();
-            Answer correctAnswer = task.getCorrectAnswer();
-            Answer userAnswer = answerIterator.next();
-
-            for(int i : correctAnswer.getAnswers()) {
-                if(userAnswer.getAnswers().contains(i)) {
-                    result += task.getPointsForCorrectAnswer();
-                }
-            }
-        }
 
         return result;
     }
@@ -49,12 +38,6 @@ public final class ScaledResultCalculatingStrategy implements ResultCalculationS
 
         int result = 0;
 
-        while (taskIterator.hasNext()) {
-            Task task = taskIterator.next();
-            Answer answer = task.getCorrectAnswer();
-
-            result += task.getPointsForCorrectAnswer() * answer.getAnswers().size();
-        }
 
         return result;
     }

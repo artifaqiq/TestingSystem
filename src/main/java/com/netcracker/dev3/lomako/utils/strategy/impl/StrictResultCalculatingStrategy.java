@@ -28,16 +28,6 @@ public final class StrictResultCalculatingStrategy implements ResultCalculationS
 
         int result = 0;
 
-        while (taskIterator.hasNext() && answerIterator.hasNext()) {
-            Task task = taskIterator.next();
-            Answer correctAnswer = task.getCorrectAnswer();
-            Answer userAnswer = answerIterator.next();
-
-            if(correctAnswer.getAnswers().containsAll(userAnswer.getAnswers())) {
-                result += task.getPointsForCorrectAnswer();
-            }
-        }
-
         return result;
     }
 
