@@ -21,7 +21,7 @@ public class Answer implements Serializable {
 
     private String text;
 
-    private boolean correct;
+    private boolean isCorrect;
 
     private long taskId;
 
@@ -34,11 +34,11 @@ public class Answer implements Serializable {
      * Creates new entity of the class <b>{@code Answer}</b>
      *
      */
-    public Answer(long id, int order, String text, boolean correct, long taskId) {
+    public Answer(long id, int order, String text, boolean isCorrect, long taskId) {
         this.id = id;
         this.order = order;
         this.text = text;
-        this.correct = correct;
+        this.isCorrect = isCorrect;
         this.taskId = taskId;
     }
 
@@ -59,11 +59,11 @@ public class Answer implements Serializable {
     }
 
     public boolean isCorrect() {
-        return correct;
+        return isCorrect;
     }
 
     public void setCorrect(boolean correct) {
-        this.correct = correct;
+        isCorrect = correct;
     }
 
     public static long getSerialVersionUID() {
@@ -100,7 +100,7 @@ public class Answer implements Serializable {
 
         if (id != answer.id) return false;
         if (order != answer.order) return false;
-        if (correct != answer.correct) return false;
+        if (isCorrect != answer.isCorrect) return false;
         if (taskId != answer.taskId) return false;
         return text.equals(answer.text);
     }
@@ -113,7 +113,7 @@ public class Answer implements Serializable {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + order;
         result = 31 * result + (text != null ? text.hashCode() : 0);
-        result = 31 * result + (correct ? 1 : 0);
+        result = 31 * result + (isCorrect ? 1 : 0);
         result = 31 * result + (int) (taskId ^ (taskId >>> 32));
         return result;
     }
@@ -129,7 +129,7 @@ public class Answer implements Serializable {
                 "id=" + id +
                 ", order=" + order +
                 ", text=" + text +
-                ", correct=" + correct +
+                ", isCorrect=" + isCorrect +
                 ", taskId=" + taskId +
                 '}';
     }

@@ -5,7 +5,6 @@ package com.netcracker.dev3.lomako.beans.task;
 
 
 import com.netcracker.dev3.lomako.beans.answer.Answer;
-import com.netcracker.dev3.lomako.beans.answer.AnswerOption;
 
 import java.io.Serializable;
 import java.util.List;
@@ -30,10 +29,7 @@ public class Task implements Serializable {
 
     private int pointsForCorrectAnswer;
 
-    private List<Answer> correctAnswers;
-
-    private List<AnswerOption> options;
-
+    private List<Answer> answers;
 
     /**
      * Creates new entity of the class <b>{@code Task}</b>
@@ -46,32 +42,29 @@ public class Task implements Serializable {
      *
      * @param text                   text which describes task
      * @param pointsForCorrectAnswer number of points that get user for correct answer on this task
-     * @param correctAnswers         correct answer to this task
-     * @param options                list of options for this task
+     * @param answers         correct answer to this task
      */
-    public Task(long id, long testId, int order, String text, int pointsForCorrectAnswer,
-                List<Answer> correctAnswers, List<AnswerOption> options) {
+    public Task(long id, long testId, int order, String text, int pointsForCorrectAnswer, List<Answer> answers) {
         this.id = id;
         this.testId = testId;
         this.order = order;
         this.text = text;
         this.pointsForCorrectAnswer = pointsForCorrectAnswer;
-        this.correctAnswers = correctAnswers;
-        this.options = options;
+        this.answers = answers;
     }
 
     /**
      * @return the correct answer for this task
      */
-    public List<Answer> getCorrectAnswers() {
-        return correctAnswers;
+    public List<Answer> getAnswers() {
+        return answers;
     }
 
     /**
-     * @param correctAnswers correct answer for this task to set
+     * @param answers correct answer for this task to set
      */
-    public void setCorrectAnswers(List<Answer> correctAnswers) {
-        this.correctAnswers = correctAnswers;
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
     }
 
     /**
@@ -103,19 +96,6 @@ public class Task implements Serializable {
         this.pointsForCorrectAnswer = pointsForCorrectAnswer;
     }
 
-    /**
-     * @return list of options for this task
-     */
-    public List<AnswerOption> getOptions() {
-        return options;
-    }
-
-    /**
-     * @param options list of options for this task to set
-     */
-    public void setOptions(List<AnswerOption> options) {
-        this.options = options;
-    }
 
     public long getId() {
         return id;
@@ -158,9 +138,7 @@ public class Task implements Serializable {
         if (order != task.order) return false;
         if (pointsForCorrectAnswer != task.pointsForCorrectAnswer) return false;
         if (text != null ? !text.equals(task.text) : task.text != null) return false;
-        if (correctAnswers != null ? !correctAnswers.equals(task.correctAnswers) : task.correctAnswers != null)
-            return false;
-        return options != null ? options.equals(task.options) : task.options == null;
+        return answers != null ? answers.equals(task.answers) : task.answers == null;
     }
 
     /**
@@ -173,8 +151,7 @@ public class Task implements Serializable {
         result = 31 * result + order;
         result = 31 * result + (text != null ? text.hashCode() : 0);
         result = 31 * result + pointsForCorrectAnswer;
-        result = 31 * result + (correctAnswers != null ? correctAnswers.hashCode() : 0);
-        result = 31 * result + (options != null ? options.hashCode() : 0);
+        result = 31 * result + (answers != null ? answers.hashCode() : 0);
         return result;
     }
 
@@ -191,8 +168,7 @@ public class Task implements Serializable {
                 ", order=" + order +
                 ", text='" + text + '\'' +
                 ", pointsForCorrectAnswer=" + pointsForCorrectAnswer +
-                ", correctAnswers=" + correctAnswers +
-                ", options=" + options +
+                ", answers=" + answers +
                 '}';
     }
 }
