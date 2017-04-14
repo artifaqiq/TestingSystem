@@ -8,27 +8,27 @@
 
 <html>
 <head>
-    <title>Sign in</title>
+    <title>${tr.translate("login")}</title>
 
-    <jsp:include page="/jsp/templates/head.jsp" />
+    <jsp:include page="/WEB-INF/jsp/templates/head.jsp" />
 
-    <script src="<c:url value="/static/js/lib/jquery-3.2.0.min.js" />"></script>
+    <script src="/static/js/lib/jquery-3.2.0.min.js"></script>
 
-    <link href="<c:url value="/static/css/user/login-register.css" />" rel="stylesheet">
-    <script src="<c:url value="/static/js/user/login-register.js" />"></script>
-    <script src="<c:url value="/static/js/user/login.js" />"></script>
+    <link href="/static/css/user/login-register.css" rel="stylesheet">
+    <script src="/static/js/user/login-register.js"></script>
+    <script src="/static/js/user/login.js"></script>
 </head>
 <body>
 
 <div class="materialContainer">
 
-    <jsp:include page="/jsp/templates/notice.jsp" />
+    <jsp:include page="/WEB-INF/jsp/templates/notice.jsp" />
 
     <div class="box">
 
-        <div class="title">Sign in</div>
+        <div class="title">${tr.translate("login")}</div>
 
-        <form method="post">
+        <form id="form" method="post">
 
             <div class="input">
                 <label for="email" id="email-lbl">Email</label>
@@ -38,18 +38,16 @@
 
 
             <div class="input">
-                <label for="pass" id="pass-lbl">Password</label>
+                <label for="pass" id="pass-lbl">${tr.translate("password")}</label>
                 <input type="password" name="password" id="pass">
                 <span class="spin"></span>
             </div>
 
-            <div class="button login">
-                <button id="reg-btn"><span id="reg-spn">Sign in</span> <i class="fa fa-check"></i></button>
-            </div>
-
         </form>
 
-        <a href="" class="pass-forgot">Forgot your password?</a>
+        <div class="button login">
+            <button id="log-btn"><span id="reg-spn">${tr.translate("login")}</span> <i class="fa fa-check"></i></button>
+        </div>
 
     </div>
 

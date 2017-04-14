@@ -1,6 +1,7 @@
 /**
  * Created by Artur Lomako on 3/28/17.
  */
+
 $(function () {
 
     var validator = {};
@@ -24,13 +25,19 @@ $(function () {
     });
 
     $("#pass").on('input', function () {
-
         if (validator.isPassVaild()) {
             $("#pass-lbl").css("color", "green");
         } else {
             $("#pass-lbl").css("color", "red");
         }
     });
+
+    $("#log-btn").click(function (event) {
+        if (validator.isButtonAvailable()) {
+            $("#form").submit();
+        }
+    })
+
 
     validator.isEmailValid = function () {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
