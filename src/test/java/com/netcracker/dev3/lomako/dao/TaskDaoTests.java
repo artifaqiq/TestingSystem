@@ -24,11 +24,11 @@ import static org.junit.Assert.*;
  * @version 1.0
  */
 public class TaskDaoTests {
-    private static TestDao testDao = TestDaoImpl.getInstance();
+    private static final TestDao testDao = TestDaoImpl.getInstance();
 
-    private static UserDao userDao = UserDaoImpl.getInstance();
+    private static final UserDao userDao = UserDaoImpl.getInstance();
 
-    private static TaskDao taskDao = TaskDaoImpl.getInstance();
+    private static final TaskDao taskDao = TaskDaoImpl.getInstance();
 
     @Test
     public void save() throws SQLException, PersistException {
@@ -46,11 +46,14 @@ public class TaskDaoTests {
         task.setOrder(order);
         task.setTestId(test.getId());
 
-        taskDao.save(task);
-        taskDao.save(task);
+        long id1= taskDao.save(task);
+        long id2 = taskDao.save(task);
 
         System.out.println("Saved x2 : ");
         System.out.println(task);
+
+        System.out.println("id1 = " + id1);
+        System.out.println("id2 = " + id2);
     }
 
     @Test

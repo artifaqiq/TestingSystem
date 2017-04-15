@@ -28,7 +28,7 @@
 
         <div class="title">${tr.translate("login")}</div>
 
-        <form id="form" method="post">
+        <form id="form" action="<%= CommandPath.LOGIN %>" method="post">
 
             <div class="input">
                 <label for="email" id="email-lbl">Email</label>

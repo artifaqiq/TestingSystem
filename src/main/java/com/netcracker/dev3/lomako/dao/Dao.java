@@ -8,7 +8,7 @@ import com.netcracker.dev3.lomako.exceptions.dao.PersistException;
 import java.sql.SQLException;
 
 public interface Dao<T, ID> {
-    <S extends T> void save(S entity) throws SQLException, PersistException;
+    <S extends T> long save(S entity) throws SQLException, PersistException;
 
     <S extends T> void update(S entity) throws SQLException, PersistException;
 

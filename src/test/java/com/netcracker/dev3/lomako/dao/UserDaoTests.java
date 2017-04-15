@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
  */
 public class UserDaoTests {
 
-    private static UserDao userDao = UserDaoImpl.getInstance();
+    private static final UserDao userDao = UserDaoImpl.getInstance();
 
     @Test
     public void save() throws SQLException {
@@ -41,13 +41,15 @@ public class UserDaoTests {
         testUser.setLastName(lastName);
         testUser.setRole(role);
 
+        long id = 0L;
         try {
-            userDao.save(testUser);
+            id = userDao.save(testUser);
         } catch (PersistException e) {
             System.out.println(e.getMessage());
         }
 
         System.out.println("Save user: " + testUser);
+        System.out.println("id = " + id);
 
     }
 

@@ -31,7 +31,7 @@ public final class AccessControl {
                 CommandName.REGISTER,
                 CommandName.LOGOUT,
                 CommandName.MAIN,
-                CommandName.CREATE_TEST,
+                CommandName.EDIT_TEST,
                 CommandName.MY_TESTS,
         });
 
@@ -40,7 +40,7 @@ public final class AccessControl {
                 CommandName.REGISTER,
                 CommandName.LOGOUT,
                 CommandName.MAIN,
-                CommandName.CREATE_TEST,
+                CommandName.EDIT_TEST,
                 CommandName.MY_TESTS,
         });
     }

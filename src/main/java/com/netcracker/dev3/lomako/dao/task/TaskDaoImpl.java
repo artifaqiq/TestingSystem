@@ -47,9 +47,11 @@ public enum  TaskDaoImpl implements TaskDao {
     private static final String EXISTS_TASKS_BY_ID_SQL =
             "SELECT EXISTS(SELECT id FROM tasks WHERE id = ?)";
 
+    private static final String SELECT_LAST_INSERT_ID_SQL =
+            "SELECT LAST_INSERT_ID() FROM tasks LIMIT 1";
 
     @Override
-    public <S extends Task> void save(S entity) throws SQLException, PersistException {
+    public synchronized <S extends Task> long save(S entity) throws SQLException, PersistException {
         try (Connection connection = connectionPool.getConnection()) {
 
             PreparedStatement insertTask = connection.prepareStatement(INSERT_TASK_SQL);
@@ -65,6 +67,12 @@ public enum  TaskDaoImpl implements TaskDao {
                         this.getClass(), e.getMessage());
                 throw e;
             }
+
+            PreparedStatement selectId = connection.prepareStatement(SELECT_LAST_INSERT_ID_SQL);
+            ResultSet resultSet = selectId.executeQuery();
+
+            resultSet.next();
+            return resultSet.getLong(1);
 
         } catch (SQLException e) {
             Logger.getInstance().error(

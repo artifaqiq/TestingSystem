@@ -56,11 +56,13 @@ public enum  UserDaoImpl implements UserDao {
     private static final String SELECT_USER_BY_EMAIL_SQL =
             "SELECT id, email, encrypted_password, first_name, last_name, role_id, created, updated FROM users WHERE email = ?";
 
+    private static final String SELECT_LAST_INSERT_ID_SQL =
+            "SELECT LAST_INSERT_ID() FROM users LIMIT 1";
 
     private static ConnectionPool connectionPool = ConnectionPool.getInstance();
 
     @Override
-    public <S extends User> void save(S entity) throws SQLException, PersistException {
+    public synchronized  <S extends User> long save(S entity) throws SQLException, PersistException {
 
         try(Connection connection = connectionPool.getConnection()) {
 
@@ -82,6 +84,12 @@ public enum  UserDaoImpl implements UserDao {
             } catch (MySQLIntegrityConstraintViolationException e) {
                 throw new UserEmailUniqueConflictException("User with some email already exists");
             }
+
+            PreparedStatement selectId = connection.prepareStatement(SELECT_LAST_INSERT_ID_SQL);
+            ResultSet resultSet = selectId.executeQuery();
+
+            resultSet.next();
+            return resultSet.getLong(1);
 
         } catch (SQLException e) {
             Logger.getInstance().error(

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.netcracker.dev3.lomako.constants.CommandPath" %><%--
   Created by IntelliJ IDEA.
   User: arturlomako
   Date: 4/8/17
@@ -14,5 +14,6 @@
 <h1>
     Insufficient access rights
 </h1>
+
 </body>
 </html>

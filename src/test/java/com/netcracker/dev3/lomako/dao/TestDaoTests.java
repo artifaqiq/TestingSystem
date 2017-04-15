@@ -24,9 +24,9 @@ import static org.junit.Assert.*;
  */
 public class TestDaoTests {
 
-    private static TestDao testDao = TestDaoImpl.getInstance();
+    private static final TestDao testDao = TestDaoImpl.getInstance();
 
-    private static UserDao userDao = UserDaoImpl.getInstance();
+    private static final UserDao userDao = UserDaoImpl.getInstance();
 
     @Test
     public void save() throws SQLException, PersistException {
@@ -42,11 +42,14 @@ public class TestDaoTests {
         test.setAuthorId(author.getId());
         test.setResultCalculationStrategyWay(strategy);
 
-        testDao.save(test);
-        testDao.save(test);
+        long id1 = testDao.save(test);
+        long id2 = testDao.save(test);
 
         System.out.println("Saved x2 : ");
         System.out.println(test);
+
+        System.out.println("id1 = " + id1);
+        System.out.println("id2 = " + id2);
     }
 
     @Test

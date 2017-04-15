@@ -44,7 +44,7 @@ public enum  TagToTestDaoImpl implements TagToTestDao {
             "SELECT EXISTS(SELECT tag_id FROM m2m_tag_test WHERE tag_id = ? AND test_id = ?)";
 
     @Override
-    public <S extends TagToTest> void save(S entity) throws SQLException, PersistException {
+    public <S extends TagToTest> long save(S entity) throws SQLException, PersistException {
         try (Connection connection = connectionPool.getConnection()) {
 
             PreparedStatement insertTagToTest = connection.prepareStatement(INSERT_TAG_TO_TEST_SQL);
@@ -63,6 +63,8 @@ public enum  TagToTestDaoImpl implements TagToTestDao {
             } catch (MySQLIntegrityConstraintViolationException e) {
                 throw new TagToTestUniqueConflictException("Tag2test with some PK already exists");
             }
+
+            return 0L;
 
         } catch (SQLException e) {
             Logger.getInstance().error(

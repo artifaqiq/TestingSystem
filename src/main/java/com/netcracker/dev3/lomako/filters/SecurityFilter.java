@@ -4,15 +4,16 @@
 package com.netcracker.dev3.lomako.filters;
 
 import com.netcracker.dev3.lomako.beans.user.Role;
+import com.netcracker.dev3.lomako.constants.I10nResource;
 import com.netcracker.dev3.lomako.constants.JspPath;
 import com.netcracker.dev3.lomako.controllers.jsp.enums.CommandName;
 import com.netcracker.dev3.lomako.dao.user.UserDao;
 import com.netcracker.dev3.lomako.dao.user.UserDaoImpl;
 import com.netcracker.dev3.lomako.utils.AccessControl;
+import com.netcracker.dev3.lomako.utils.Translator;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -23,6 +24,8 @@ public class SecurityFilter implements Filter {
 
     private static final UserDao userDao = UserDaoImpl.getInstance();
 
+    protected Translator translator;
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -32,16 +35,21 @@ public class SecurityFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain filterChain)
             throws IOException, ServletException {
 
-        HttpServletRequest request = (HttpServletRequest)req;
+        HttpServletRequest request = (HttpServletRequest) req;
+
+        final String locale = (String) request.getSession().getAttribute("locale");
+        translator = new Translator(I10nResource.USER, locale);
+        request.setAttribute("tr", translator);
+
         String commandString = request.getParameter("command");
         CommandName commandName = null;
-        if(commandString == null) {
+        if (commandString == null) {
             filterChain.doFilter(req, resp);
         } else {
             commandName = CommandName.valueOf(commandString.toUpperCase());
         }
 
-        String roleString = (String)((HttpServletRequest) req).getSession().getAttribute("role");
+        String roleString = (String) ((HttpServletRequest) req).getSession().getAttribute("role");
         Role role;
         if (roleString == null) {
             role = Role.GUEST;
@@ -49,17 +57,15 @@ public class SecurityFilter implements Filter {
             role = Role.valueOf(roleString);
         }
 
-        if(!AccessControl.hasAccess(role, commandName)) {
-            req.getRequestDispatcher(JspPath.ERROR_403).forward(req, resp);
+        if (!AccessControl.hasAccess(role, commandName)) {
+            req.setAttribute("notice", translator.translate("not_access_rights"));
+            req.getRequestDispatcher(JspPath.LOGIN).forward(req, resp);
         }
-
 
         filterChain.doFilter(req, resp);
     }
 
     @Override
-    public void destroy() {
+    public void destroy() { }
 
-    }
-    
 }

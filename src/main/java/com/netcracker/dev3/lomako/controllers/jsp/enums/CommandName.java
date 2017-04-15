@@ -12,7 +12,7 @@ public enum CommandName {
     LOGOUT,
     REGISTER,
     MAIN,
-    CREATE_TEST,
+    EDIT_TEST,
     MY_TESTS
 
 }

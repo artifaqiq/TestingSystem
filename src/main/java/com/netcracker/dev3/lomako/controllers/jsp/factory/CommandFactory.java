@@ -6,7 +6,7 @@ package com.netcracker.dev3.lomako.controllers.jsp.factory;
 import com.netcracker.dev3.lomako.controllers.jsp.commands.Command;
 import com.netcracker.dev3.lomako.controllers.jsp.commands.dashboard.MainCommand;
 import com.netcracker.dev3.lomako.controllers.jsp.commands.dashboard.MyTestsCommand;
-import com.netcracker.dev3.lomako.controllers.jsp.commands.test.CreatingTest;
+import com.netcracker.dev3.lomako.controllers.jsp.commands.test.EditingTest;
 import com.netcracker.dev3.lomako.controllers.jsp.commands.user.LoginCommand;
 import com.netcracker.dev3.lomako.controllers.jsp.commands.user.RegisterCommand;
 import com.netcracker.dev3.lomako.controllers.jsp.commands.user.LogOutCommand;
@@ -40,8 +40,8 @@ public enum CommandFactory  {
             case MAIN:
                 command = new MainCommand();
                 break;
-            case CREATE_TEST:
-                command = new CreatingTest();
+            case EDIT_TEST:
+                command = new EditingTest();
                 break;
             case MY_TESTS:
                 command = new MyTestsCommand();

@@ -24,9 +24,9 @@ import static org.junit.Assert.*;
  */
 @SuppressWarnings("Duplicates")
 public class AnswerDaoTests {
-    private static TaskDao taskDao = TaskDaoImpl.getInstance();
+    private static final TaskDao taskDao = TaskDaoImpl.getInstance();
 
-    private static AnswerDao answerDao = AnswerDaoImpl.getInstance();
+    private static final AnswerDao answerDao = AnswerDaoImpl.getInstance();
 
     @Test
     public void save() throws SQLException, PersistException {
@@ -39,11 +39,14 @@ public class AnswerDaoTests {
         answer.setText("Answer#" + new Random().nextInt());
         answer.setOrder(Math.abs(new Random().nextInt() % 10));
 
-        answerDao.save(answer);
-        answerDao.save(answer);
+        long id1 = answerDao.save(answer);
+        long id2 = answerDao.save(answer);
 
         System.out.println("Saved x2 : ");
         System.out.println(answer);
+
+        System.out.println("id1 = " + id1);
+        System.out.println("id2 = " + id2);
     }
 
     @Test

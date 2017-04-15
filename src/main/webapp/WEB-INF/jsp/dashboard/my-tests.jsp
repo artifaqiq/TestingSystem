@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.netcracker.dev3.lomako.constants.CommandPath" %><%--
   Created by Artur Lomako
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -25,7 +25,13 @@
 
 <div class="col-sm-12">
 
+</div>
 
+<div class="col-sm-6 col-sm-offset-3">
+    <a href="<%= CommandPath.EDIT_TEST %>" type="button" class="btn btn-block btn-success"
+       data-type="plus" data-field="quant[2]">
+        <span class="glyphicon glyphicon-plus"></span>
+    </a>
 </div>
 
 </section>

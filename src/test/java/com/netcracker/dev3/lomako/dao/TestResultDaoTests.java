@@ -27,11 +27,11 @@ import static org.junit.Assert.*;
 @SuppressWarnings("Duplicates")
 public class TestResultDaoTests {
 
-    private static TestResultDao testResultDao = TestResultDaoImpl.getInstance();
+    private static final TestResultDao testResultDao = TestResultDaoImpl.getInstance();
 
-    private static UserDao userDao = UserDaoImpl.getInstance();
+    private static final UserDao userDao = UserDaoImpl.getInstance();
 
-    private static TestDao testDao = TestDaoImpl.getInstance();
+    private static final TestDao testDao = TestDaoImpl.getInstance();
 
     @Test
     public void save() throws SQLException, PersistException {
@@ -46,10 +46,13 @@ public class TestResultDaoTests {
         testResult.setUserId(user.getId());
         testResult.setTestId(test.getId());
 
-        testResultDao.save(testResult);
-        testResultDao.save(testResult);
+        long id1 = testResultDao.save(testResult);
+        long id2 = testResultDao.save(testResult);
 
         System.out.println("Save testResult x2: " + testResult);
+
+        System.out.println("id1 = " + id1);
+        System.out.println("id2 = " + id2);
 
     }
 

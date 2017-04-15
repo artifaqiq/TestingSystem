@@ -49,8 +49,11 @@ public enum TagDaoImpl implements TagDao {
     private static final String EXISTS_TAG_BY_ID_SQL =
             "SELECT EXISTS(SELECT id FROM tags WHERE id = ?)";
 
+    private static final String SELECT_LAST_INSERT_ID_SQL =
+            "SELECT LAST_INSERT_ID() FROM tags LIMIT 1";
+
     @Override
-    public <S extends Tag> void save(S entity) throws SQLException, PersistException {
+    public synchronized <S extends Tag> long save(S entity) throws SQLException, PersistException {
         try (Connection connection = connectionPool.getConnection()) {
 
             PreparedStatement insertTag = connection.prepareStatement(INSERT_TAG_SQL);
@@ -67,6 +70,12 @@ public enum TagDaoImpl implements TagDao {
             } catch (MySQLIntegrityConstraintViolationException e) {
                 throw new TagTitleUniqueConflictException("Tag with some title already exists");
             }
+
+            PreparedStatement selectId = connection.prepareStatement(SELECT_LAST_INSERT_ID_SQL);
+            ResultSet resultSet = selectId.executeQuery();
+
+            resultSet.next();
+            return resultSet.getLong(1);
 
         } catch (SQLException e) {
             Logger.getInstance().error(

@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
  */
 @SuppressWarnings("Duplicates")
 public class TagDaoTests {
-    private static TagDao tagDao = TagDaoImpl.getInstance();
+    private static final TagDao tagDao = TagDaoImpl.getInstance();
 
     @Test(expected = TagTitleUniqueConflictException.class)
     public void save() throws SQLException, PersistException {
@@ -32,10 +32,15 @@ public class TagDaoTests {
         Tag testTag = new Tag();
         testTag.setTitle(title);
 
-        tagDao.save(testTag);
-        tagDao.save(testTag);
+        long id1 = tagDao.save(testTag);
+        System.out.println("id1 = " + id1);
+
+        long id2 = tagDao.save(testTag);
 
         System.out.println("Save tag: " + testTag);
+
+        System.out.println("id2 = " + id2);
+
 
     }
 

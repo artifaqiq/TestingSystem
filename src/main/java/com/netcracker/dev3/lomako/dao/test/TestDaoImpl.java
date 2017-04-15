@@ -48,9 +48,11 @@ public enum  TestDaoImpl implements TestDao {
     private static final String EXISTS_TEST_BY_ID_SQL =
             "SELECT EXISTS(SELECT id FROM tests WHERE id = ?)";
 
+    private static final String SELECT_LAST_INSERT_ID_SQL =
+            "SELECT LAST_INSERT_ID() FROM tests LIMIT 1;";
 
     @Override
-    public <S extends Test> void save(S entity) throws SQLException, PersistException {
+    public synchronized <S extends Test> long save(S entity) throws SQLException, PersistException {
         try (Connection connection = connectionPool.getConnection()) {
 
             PreparedStatement insertTest = connection.prepareStatement(INSERT_TEST_SQL);
@@ -66,6 +68,12 @@ public enum  TestDaoImpl implements TestDao {
                         this.getClass(), e.getMessage());
                 throw e;
             }
+
+            PreparedStatement selectId = connection.prepareStatement(SELECT_LAST_INSERT_ID_SQL);
+            ResultSet resultSet = selectId.executeQuery();
+
+            resultSet.next();
+            return resultSet.getLong(1);
 
         } catch (SQLException e) {
             Logger.getInstance().error(

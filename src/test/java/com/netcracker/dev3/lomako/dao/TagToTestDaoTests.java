@@ -29,11 +29,11 @@ import static org.junit.Assert.assertFalse;
 
 @SuppressWarnings("Duplicates")
 public class TagToTestDaoTests {
-    private static TagToTestDao tagToTestDao = TagToTestDaoImpl.getInstance();
+    private static final TagToTestDao tagToTestDao = TagToTestDaoImpl.getInstance();
 
-    private static TestDao testDao = TestDaoImpl.getInstance();
+    private static final TestDao testDao = TestDaoImpl.getInstance();
 
-    private static TagDao tagDao = TagDaoImpl.getInstance();
+    private static final TagDao tagDao = TagDaoImpl.getInstance();
 
     @Test(expected = TagToTestUniqueConflictException.class)
     public void save() throws SQLException, PersistException {
@@ -50,13 +50,12 @@ public class TagToTestDaoTests {
         tagToTest.setTestId(test.getId());
         tagToTest.setTagId(tag.getId());
 
-        tagToTestDao.save(tagToTest);
+        long id = tagToTestDao.save(tagToTest);
 
         System.out.println("Save tagToTest: " + tagToTest);
-
+        System.out.println("id = " + id);
+        
         tagToTestDao.save(tagToTest);
-
-
 
     }
 
