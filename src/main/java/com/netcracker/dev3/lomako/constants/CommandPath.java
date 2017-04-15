@@ -15,4 +15,5 @@ public final class CommandPath {
     public static final String LOGOUT = "/Controller?command=logout";
 
     public static final String CREATE_TEST = "/Controller?command=create_test";
+    public static final String MY_TESTS = "/Controller?command=my_tests";
 }

@@ -1,23 +1,20 @@
 /**
  * Copyright (c) 2017, Lomako. All rights reserved.
  */
-package com.netcracker.dev3.lomako.controllers.commands.user;
+package com.netcracker.dev3.lomako.controllers.jsp.commands.user;
 
 import com.netcracker.dev3.lomako.beans.user.Role;
 import com.netcracker.dev3.lomako.beans.user.User;
-import com.netcracker.dev3.lomako.constants.I10nResource;
 import com.netcracker.dev3.lomako.constants.JspPath;
-import com.netcracker.dev3.lomako.controllers.commands.Command;
+import com.netcracker.dev3.lomako.controllers.jsp.commands.Command;
 import com.netcracker.dev3.lomako.dao.user.UserDao;
 import com.netcracker.dev3.lomako.dao.user.UserDaoImpl;
-import com.netcracker.dev3.lomako.exceptions.dao.PersistException;
 import com.netcracker.dev3.lomako.exceptions.dao.UserEmailUniqueConflictException;
 import com.netcracker.dev3.lomako.utils.PasswordCryptography;
-import com.netcracker.dev3.lomako.utils.Translator;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.sql.SQLException;
 
 
 /**
@@ -29,12 +26,12 @@ public class RegisterCommand extends Command {
     private static final UserDao userDao = UserDaoImpl.getInstance();
 
     @Override
-    protected String executeGet(HttpServletRequest req) {
-        return JspPath.REGISTER;
+    protected void executeGet(HttpServletRequest req, HttpServletResponse resp) throws Exception{
+        req.getRequestDispatcher(JspPath.REGISTER).forward(req, resp);
     }
 
     @Override
-    protected String executePost(HttpServletRequest req) throws Exception {
+    protected void executePost(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         final String email = req.getParameter("email");
         final String password = req.getParameter("password");
         final String firstName = req.getParameter("firstName");
@@ -61,9 +58,9 @@ public class RegisterCommand extends Command {
 
         catch (UserEmailUniqueConflictException e) {
             req.setAttribute("notice", translator.translate("user_with_some_email_already_exists"));
-            return JspPath.REGISTER;
+            req.getRequestDispatcher(JspPath.REGISTER).forward(req, resp);
         }
-        return JspPath.MAIN;
+        resp.sendRedirect(JspPath.MAIN);
     }
 
     private static void setSessionUserAttributes(User user, HttpSession session) {

@@ -1,18 +1,18 @@
 /**
  * Copyright (c) 2017, Lomako. All rights reserved.
  */
-package com.netcracker.dev3.lomako.controllers.commands.user;
+package com.netcracker.dev3.lomako.controllers.jsp.commands.user;
 
 import com.netcracker.dev3.lomako.beans.user.User;
-import com.netcracker.dev3.lomako.constants.I10nResource;
+import com.netcracker.dev3.lomako.constants.CommandPath;
 import com.netcracker.dev3.lomako.constants.JspPath;
-import com.netcracker.dev3.lomako.controllers.commands.Command;
+import com.netcracker.dev3.lomako.controllers.jsp.commands.Command;
 import com.netcracker.dev3.lomako.dao.user.UserDao;
 import com.netcracker.dev3.lomako.dao.user.UserDaoImpl;
 import com.netcracker.dev3.lomako.utils.PasswordCryptography;
-import com.netcracker.dev3.lomako.utils.Translator;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -23,12 +23,12 @@ public final class LoginCommand extends Command {
     private static final UserDao userDao = UserDaoImpl.getInstance();
 
     @Override
-    protected String executeGet(HttpServletRequest req) {
-        return JspPath.LOGIN;
+    protected void executeGet(HttpServletRequest req, HttpServletResponse resp) throws Exception{
+        req.getRequestDispatcher(JspPath.LOGIN).forward(req, resp);
     }
 
     @Override
-    protected String executePost(HttpServletRequest req) throws Exception {
+    protected void executePost(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         final String email = req.getParameter("email");
         final String password = req.getParameter("password");
 
@@ -36,11 +36,11 @@ public final class LoginCommand extends Command {
 
         if (user == null || !PasswordCryptography.check(password, user.getEncryptedPassword())) {
             req.setAttribute("notice", translator.translate("incorrect_login_or_password"));
-            return JspPath.LOGIN;
+            req.getRequestDispatcher(JspPath.LOGIN).forward(req, resp);
 
         } else {
             setSessionUserAttributes(user, req.getSession());
-            return JspPath.MAIN;
+            resp.sendRedirect(CommandPath.MAIN);
         }
     }
 

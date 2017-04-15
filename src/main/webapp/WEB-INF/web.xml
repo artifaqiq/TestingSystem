@@ -9,7 +9,7 @@
 
     <servlet>
         <servlet-name>Controller</servlet-name>
-        <servlet-class>com.netcracker.dev3.lomako.controllers.Controller</servlet-class>
+        <servlet-class>com.netcracker.dev3.lomako.controllers.jsp.Controller</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -17,21 +17,31 @@
         <url-pattern>/Controller</url-pattern>
     </servlet-mapping>
 
-    <servlet-mapping>
-        <servlet-name>Controller</servlet-name>
-        <url-pattern>/welcome</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>Controller</servlet-name>
-        <url-pattern>/login</url-pattern>
-    </servlet-mapping>
-
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
         <welcome-file>index.htm</welcome-file>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+
+    <filter>
+        <filter-name>Utf8Filter</filter-name>
+        <filter-class>com.netcracker.dev3.lomako.filters.Utf8Filter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>Utf8Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>SecurityFilter</filter-name>
+        <filter-class>com.netcracker.dev3.lomako.filters.SecurityFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>SecurityFilter</filter-name>
+        <url-pattern>/Controller</url-pattern>
+    </filter-mapping>
+
 
 </web-app>
 

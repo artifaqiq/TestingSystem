@@ -10,7 +10,7 @@
         <ul>
             <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
             <li><a href="#"><i class="fa fa-search"></i> Find test</a></li>
-            <li><a href="#"><i class="fa fa-inbox"></i> My tests</a></li>
+            <li><a href="<%= CommandPath.MY_TESTS %>"><i class="fa fa-inbox"></i> My tests</a></li>
             <li><a href="#"><i class="fa fa-newspaper-o"></i> Solved tests</a></li>
             <li><a href="<%= CommandPath.CREATE_TEST %>"><i class="fa fa-plus"></i> Create test</a></li>
 

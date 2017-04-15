@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 public enum Role implements Serializable {
 
-    USER, ADMIN;
+    USER, ADMIN, GUEST;
 
     public int getIdInRolesTable() {
         switch (this) {

@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2017, Lomako. All rights reserved.
  */
-package com.netcracker.dev3.lomako.controllers.enums;
+package com.netcracker.dev3.lomako.controllers.jsp.enums;
 
 /**
  * @author Lomako
@@ -12,6 +12,7 @@ public enum CommandName {
     LOGOUT,
     REGISTER,
     MAIN,
-    CREATE_TEST
+    CREATE_TEST,
+    MY_TESTS
 
 }

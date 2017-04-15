@@ -1,15 +1,16 @@
 /**
  * Copyright (c) 2017, Lomako. All rights reserved.
  */
-package com.netcracker.dev3.lomako.controllers.factory;
+package com.netcracker.dev3.lomako.controllers.jsp.factory;
 
-import com.netcracker.dev3.lomako.controllers.commands.Command;
-import com.netcracker.dev3.lomako.controllers.commands.dashboard.MainCommand;
-import com.netcracker.dev3.lomako.controllers.commands.test.CreatingTest;
-import com.netcracker.dev3.lomako.controllers.commands.user.LoginCommand;
-import com.netcracker.dev3.lomako.controllers.commands.user.RegisterCommand;
-import com.netcracker.dev3.lomako.controllers.commands.user.LogOutCommand;
-import com.netcracker.dev3.lomako.controllers.enums.CommandName;
+import com.netcracker.dev3.lomako.controllers.jsp.commands.Command;
+import com.netcracker.dev3.lomako.controllers.jsp.commands.dashboard.MainCommand;
+import com.netcracker.dev3.lomako.controllers.jsp.commands.dashboard.MyTestsCommand;
+import com.netcracker.dev3.lomako.controllers.jsp.commands.test.CreatingTest;
+import com.netcracker.dev3.lomako.controllers.jsp.commands.user.LoginCommand;
+import com.netcracker.dev3.lomako.controllers.jsp.commands.user.RegisterCommand;
+import com.netcracker.dev3.lomako.controllers.jsp.commands.user.LogOutCommand;
+import com.netcracker.dev3.lomako.controllers.jsp.enums.CommandName;
 
 /**
  * @author Lomako
@@ -41,6 +42,9 @@ public enum CommandFactory  {
                 break;
             case CREATE_TEST:
                 command = new CreatingTest();
+                break;
+            case MY_TESTS:
+                command = new MyTestsCommand();
                 break;
             default:
                 throw new IllegalArgumentException();

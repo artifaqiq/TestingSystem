@@ -1,12 +1,13 @@
 /**
  * Copyright (c) 2017, Lomako. All rights reserved.
  */
-package com.netcracker.dev3.lomako.controllers;
+package com.netcracker.dev3.lomako.controllers.jsp;
 
+import com.netcracker.dev3.lomako.constants.CommandPath;
 import com.netcracker.dev3.lomako.constants.JspPath;
-import com.netcracker.dev3.lomako.controllers.commands.Command;
-import com.netcracker.dev3.lomako.controllers.enums.CommandName;
-import com.netcracker.dev3.lomako.controllers.factory.CommandFactory;
+import com.netcracker.dev3.lomako.controllers.jsp.commands.Command;
+import com.netcracker.dev3.lomako.controllers.jsp.enums.CommandName;
+import com.netcracker.dev3.lomako.controllers.jsp.factory.CommandFactory;
 import com.netcracker.dev3.lomako.utils.Logger;
 
 import javax.servlet.ServletException;
@@ -41,14 +42,11 @@ public class Controller extends HttpServlet {
 
         String path;
         try {
-            path = command.execute(req);
+            command.execute(req, resp);
         } catch (Exception e) {
             Logger.getInstance().fatal(this.getClass(), e.getMessage());
             path = JspPath.ERROR_500;
         }
-
-        req.getRequestDispatcher(path).forward(req, resp);
-
 
     }
 }

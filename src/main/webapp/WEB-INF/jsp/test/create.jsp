@@ -155,13 +155,13 @@
 
     <div class="col-sm-12">
         <!-- Name-->
-        <h1>{{C.test.name}}</h1>
-
-        <p>{{C.test.description}}</p>
-
-        <hr/>
-        <p>Strategy: {{C.test.strategy}}</p>
-
+        <div class="page-header">
+            <h2><div>{{C.test.name}}</div>
+                <small>
+                    {{C.test.description}}
+                </small>
+            </h2>
+        </div>
 
         <!-- Tasks -->
         <label for="tasks">Tasks:</label>
@@ -173,17 +173,16 @@
                 <h3>{{task.text}}</h3>
 
                 <div class="col-sm-12">
-                    <div ng-repeat="answer in task.answers" class="col-sm-12">
-
-                        <div class="checkbox col-sm-1">
-                            <label><input type="checkbox"></label>
+                    <div ng-repeat="answer in task.answers" class="[ form-group ]">
+                        <input type="checkbox" name="fancy-checkbox-default" id="fancy-checkbox-default" autocomplete="off" />
+                        <div class="[ btn-group ] col-sm-12 ">
+                            <label for="fancy-checkbox-default" class="[ btn btn-default ] col-sm-1">
+                                <span class="[ glyphicon glyphicon-ok ]"></span>
+                            </label>
+                            <div class="col-sm-11">
+                                {{answer.text}}
+                            </div>
                         </div>
-
-                        <div class="col-sm-11">
-                            {{answer.text}}
-                        </div>
-
-
                     </div>
                 </div>
 
