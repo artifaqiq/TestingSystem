@@ -3,12 +3,10 @@
  */
 package com.netcracker.dev3.lomako.dao;
 
-import com.netcracker.dev3.lomako.beans.test.ResultCalculationStrategyWay;
-import com.netcracker.dev3.lomako.beans.user.User;
-import com.netcracker.dev3.lomako.dao.test.TestDao;
-import com.netcracker.dev3.lomako.dao.test.TestDaoImpl;
-import com.netcracker.dev3.lomako.dao.user.UserDao;
-import com.netcracker.dev3.lomako.dao.user.UserDaoImpl;
+import com.netcracker.dev3.lomako.beans.ResultCalculationStrategyWay;
+import com.netcracker.dev3.lomako.beans.User;
+import com.netcracker.dev3.lomako.dao.impl.TestDaoImpl;
+import com.netcracker.dev3.lomako.dao.impl.UserDaoImpl;
 import com.netcracker.dev3.lomako.exceptions.dao.PersistException;
 import org.junit.Test;
 
@@ -30,7 +28,7 @@ public class TestDaoTests {
 
     @Test
     public void save() throws SQLException, PersistException {
-        com.netcracker.dev3.lomako.beans.test.Test test = new com.netcracker.dev3.lomako.beans.test.Test();
+        com.netcracker.dev3.lomako.beans.Test test = new com.netcracker.dev3.lomako.beans.Test();
 
         final User author = ((List<User>)userDao.findAll()).get(0);
         final ResultCalculationStrategyWay strategy = ResultCalculationStrategyWay.SCALED;
@@ -54,10 +52,10 @@ public class TestDaoTests {
 
     @Test
     public void update() throws SQLException, PersistException {
-        List<com.netcracker.dev3.lomako.beans.test.Test> tests =
-                (List<com.netcracker.dev3.lomako.beans.test.Test>)testDao.findAll();
+        List<com.netcracker.dev3.lomako.beans.Test> tests =
+                (List<com.netcracker.dev3.lomako.beans.Test>)testDao.findAll();
 
-        com.netcracker.dev3.lomako.beans.test.Test test =
+        com.netcracker.dev3.lomako.beans.Test test =
                 tests.get(Math.abs(new Random().nextInt()) % tests.size());
 
         test.setName("_" + test.getName());
@@ -73,12 +71,12 @@ public class TestDaoTests {
 
     @Test
     public void findAll() throws SQLException {
-        List<com.netcracker.dev3.lomako.beans.test.Test> tests =
-                (List<com.netcracker.dev3.lomako.beans.test.Test>)testDao.findAll();
+        List<com.netcracker.dev3.lomako.beans.Test> tests =
+                (List<com.netcracker.dev3.lomako.beans.Test>)testDao.findAll();
 
         assertNotNull(tests);
 
-        for (com.netcracker.dev3.lomako.beans.test.Test test : tests) {
+        for (com.netcracker.dev3.lomako.beans.Test test : tests) {
             System.out.println(test);
         }
 
@@ -86,10 +84,10 @@ public class TestDaoTests {
 
     @Test
     public void findOne() throws SQLException {
-        List<com.netcracker.dev3.lomako.beans.test.Test> tests =
-                (List<com.netcracker.dev3.lomako.beans.test.Test>)testDao.findAll();
+        List<com.netcracker.dev3.lomako.beans.Test> tests =
+                (List<com.netcracker.dev3.lomako.beans.Test>)testDao.findAll();
 
-        com.netcracker.dev3.lomako.beans.test.Test test = tests.get(
+        com.netcracker.dev3.lomako.beans.Test test = tests.get(
                 Math.abs(new Random().nextInt() % tests.size()));
 
         assertEquals(testDao.findOne(test.getId()).toString(), test.toString());
@@ -100,10 +98,10 @@ public class TestDaoTests {
 
     @Test
     public void delete() throws SQLException {
-        List<com.netcracker.dev3.lomako.beans.test.Test> tests =
-                (List<com.netcracker.dev3.lomako.beans.test.Test>)testDao.findAll();
+        List<com.netcracker.dev3.lomako.beans.Test> tests =
+                (List<com.netcracker.dev3.lomako.beans.Test>)testDao.findAll();
 
-        com.netcracker.dev3.lomako.beans.test.Test test = tests.get(
+        com.netcracker.dev3.lomako.beans.Test test = tests.get(
                 Math.abs(new Random().nextInt() % tests.size()));
 
         testDao.delete(test);
@@ -113,7 +111,7 @@ public class TestDaoTests {
 
     @Test
     public void count() throws SQLException {
-        long count1 = ((List<com.netcracker.dev3.lomako.beans.test.Test>)testDao.findAll()).size();
+        long count1 = ((List<com.netcracker.dev3.lomako.beans.Test>)testDao.findAll()).size();
         long count2 = testDao.count();
 
         assertEquals(count1, count2);
@@ -124,10 +122,10 @@ public class TestDaoTests {
     @Test
     public void exists() throws SQLException, PersistException {
 
-        List<com.netcracker.dev3.lomako.beans.test.Test> tests =
-                (List<com.netcracker.dev3.lomako.beans.test.Test>)testDao.findAll();
+        List<com.netcracker.dev3.lomako.beans.Test> tests =
+                (List<com.netcracker.dev3.lomako.beans.Test>)testDao.findAll();
 
-        com.netcracker.dev3.lomako.beans.test.Test test =
+        com.netcracker.dev3.lomako.beans.Test test =
                 tests.get(Math.abs(new Random().nextInt()) % tests.size());
 
         assertTrue(testDao.exists(test.getId()));

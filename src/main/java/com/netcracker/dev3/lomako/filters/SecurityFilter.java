@@ -3,13 +3,9 @@
  */
 package com.netcracker.dev3.lomako.filters;
 
-import com.netcracker.dev3.lomako.beans.user.Role;
 import com.netcracker.dev3.lomako.constants.I10nResource;
-import com.netcracker.dev3.lomako.constants.JspPath;
-import com.netcracker.dev3.lomako.controllers.jsp.enums.CommandName;
-import com.netcracker.dev3.lomako.dao.user.UserDao;
-import com.netcracker.dev3.lomako.dao.user.UserDaoImpl;
-import com.netcracker.dev3.lomako.utils.AccessControl;
+import com.netcracker.dev3.lomako.dao.UserDao;
+import com.netcracker.dev3.lomako.dao.impl.UserDaoImpl;
 import com.netcracker.dev3.lomako.utils.Translator;
 
 import javax.servlet.*;
@@ -41,26 +37,28 @@ public class SecurityFilter implements Filter {
         translator = new Translator(I10nResource.USER, locale);
         request.setAttribute("tr", translator);
 
-        String commandString = request.getParameter("command");
-        CommandName commandName = null;
-        if (commandString == null) {
-            filterChain.doFilter(req, resp);
-        } else {
-            commandName = CommandName.valueOf(commandString.toUpperCase());
-        }
+        request.getSession().setAttribute("id", 44L);
 
-        String roleString = (String) ((HttpServletRequest) req).getSession().getAttribute("role");
-        Role role;
-        if (roleString == null) {
-            role = Role.GUEST;
-        } else {
-            role = Role.valueOf(roleString);
-        }
-
-        if (!AccessControl.hasAccess(role, commandName)) {
-            req.setAttribute("notice", translator.translate("not_access_rights"));
-            req.getRequestDispatcher(JspPath.LOGIN).forward(req, resp);
-        }
+//        String commandString = request.getParameter("command");
+//        CommandName commandName = null;
+//        if (commandString == null) {
+//            filterChain.doFilter(req, resp);
+//        } else {
+//            commandName = CommandName.valueOf(commandString.toUpperCase());
+//        }
+//
+//        String roleString = (String) ((HttpServletRequest) req).getSession().getAttribute("role");
+//        Role role;
+//        if (roleString == null) {
+//            role = Role.GUEST;
+//        } else {
+//            role = Role.valueOf(roleString);
+//        }
+//
+//        if (!AccessControl.hasAccess(role, commandName)) {
+//            req.setAttribute("notice", translator.translate("not_access_rights"));
+//            req.getRequestDispatcher(JspPath.LOGIN).forward(req, resp);
+//        }
 
         filterChain.doFilter(req, resp);
     }

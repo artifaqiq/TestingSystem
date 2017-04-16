@@ -9,7 +9,7 @@
 
     <servlet>
         <servlet-name>Controller</servlet-name>
-        <servlet-class>com.netcracker.dev3.lomako.controllers.jsp.Controller</servlet-class>
+        <servlet-class>com.netcracker.dev3.lomako.controllers.Controller</servlet-class>
     </servlet>
 
     <servlet-mapping>

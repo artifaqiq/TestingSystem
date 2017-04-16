@@ -3,13 +3,10 @@
  */
 package com.netcracker.dev3.lomako.dao;
 
-import com.netcracker.dev3.lomako.beans.task.Task;
-import com.netcracker.dev3.lomako.dao.task.TaskDao;
-import com.netcracker.dev3.lomako.dao.task.TaskDaoImpl;
-import com.netcracker.dev3.lomako.dao.test.TestDao;
-import com.netcracker.dev3.lomako.dao.test.TestDaoImpl;
-import com.netcracker.dev3.lomako.dao.user.UserDao;
-import com.netcracker.dev3.lomako.dao.user.UserDaoImpl;
+import com.netcracker.dev3.lomako.beans.Task;
+import com.netcracker.dev3.lomako.dao.impl.TaskDaoImpl;
+import com.netcracker.dev3.lomako.dao.impl.TestDaoImpl;
+import com.netcracker.dev3.lomako.dao.impl.UserDaoImpl;
 import com.netcracker.dev3.lomako.exceptions.dao.PersistException;
 import org.junit.Test;
 
@@ -34,8 +31,8 @@ public class TaskDaoTests {
     public void save() throws SQLException, PersistException {
         Task task = new Task();
 
-        final com.netcracker.dev3.lomako.beans.test.Test test =
-                ((List<com.netcracker.dev3.lomako.beans.test.Test>)testDao.findAll())
+        final com.netcracker.dev3.lomako.beans.Test test =
+                ((List<com.netcracker.dev3.lomako.beans.Test>)testDao.findAll())
                         .get(0);
         final String text = "Task#" + new Random().nextInt();
         final int points = Math.abs(new Random().nextInt() % 5);

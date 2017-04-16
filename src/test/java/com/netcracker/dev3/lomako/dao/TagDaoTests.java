@@ -3,9 +3,8 @@
  */
 package com.netcracker.dev3.lomako.dao;
 
-import com.netcracker.dev3.lomako.beans.tag.Tag;
-import com.netcracker.dev3.lomako.dao.tag.TagDao;
-import com.netcracker.dev3.lomako.dao.tag.TagDaoImpl;
+import com.netcracker.dev3.lomako.beans.Tag;
+import com.netcracker.dev3.lomako.dao.impl.TagDaoImpl;
 import com.netcracker.dev3.lomako.exceptions.dao.PersistException;
 import com.netcracker.dev3.lomako.exceptions.dao.TagTitleUniqueConflictException;
 import org.junit.Test;
@@ -40,8 +39,6 @@ public class TagDaoTests {
         System.out.println("Save tag: " + testTag);
 
         System.out.println("id2 = " + id2);
-
-
     }
 
     @Test
@@ -117,6 +114,15 @@ public class TagDaoTests {
         assertTrue(tagDao.exists(tag.getId()));
         assertFalse(tagDao.exists(23859741897L));
 
+    }
+
+    @Test
+    public void findByTitle() throws SQLException {
+        List<Tag> tags = (List<Tag>)tagDao.findAll();
+        Tag tag = tags.get(Math.abs(new Random().nextInt()) % tags.size());
+
+        assertEquals(tag, tagDao.findByTitle(tag.getTitle()));
+        assertNull(tagDao.findByTitle("arfsgdsfgwtq345345"));
     }
 
 }

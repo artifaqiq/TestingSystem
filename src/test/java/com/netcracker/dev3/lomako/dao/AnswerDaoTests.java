@@ -3,12 +3,10 @@
  */
 package com.netcracker.dev3.lomako.dao;
 
-import com.netcracker.dev3.lomako.beans.answer.Answer;
-import com.netcracker.dev3.lomako.beans.task.Task;
-import com.netcracker.dev3.lomako.dao.answer.AnswerDao;
-import com.netcracker.dev3.lomako.dao.answer.AnswerDaoImpl;
-import com.netcracker.dev3.lomako.dao.task.TaskDao;
-import com.netcracker.dev3.lomako.dao.task.TaskDaoImpl;
+import com.netcracker.dev3.lomako.beans.Answer;
+import com.netcracker.dev3.lomako.beans.Task;
+import com.netcracker.dev3.lomako.dao.impl.AnswerDaoImpl;
+import com.netcracker.dev3.lomako.dao.impl.TaskDaoImpl;
 import com.netcracker.dev3.lomako.exceptions.dao.PersistException;
 import org.junit.Test;
 

@@ -3,14 +3,11 @@
  */
 package com.netcracker.dev3.lomako.dao;
 
-import com.netcracker.dev3.lomako.beans.m2m.TagToTest;
-import com.netcracker.dev3.lomako.beans.tag.Tag;
-import com.netcracker.dev3.lomako.dao.m2m.TagToTestDao;
-import com.netcracker.dev3.lomako.dao.m2m.TagToTestDaoImpl;
-import com.netcracker.dev3.lomako.dao.tag.TagDao;
-import com.netcracker.dev3.lomako.dao.tag.TagDaoImpl;
-import com.netcracker.dev3.lomako.dao.test.TestDao;
-import com.netcracker.dev3.lomako.dao.test.TestDaoImpl;
+import com.netcracker.dev3.lomako.beans.TagToTest;
+import com.netcracker.dev3.lomako.beans.Tag;
+import com.netcracker.dev3.lomako.dao.impl.TagDaoImpl;
+import com.netcracker.dev3.lomako.dao.impl.TagToTestDaoImpl;
+import com.netcracker.dev3.lomako.dao.impl.TestDaoImpl;
 import com.netcracker.dev3.lomako.exceptions.dao.PersistException;
 import com.netcracker.dev3.lomako.exceptions.dao.TagToTestUniqueConflictException;
 import org.junit.Test;
@@ -39,11 +36,11 @@ public class TagToTestDaoTests {
     public void save() throws SQLException, PersistException {
 
         List<Tag> tags = (List<Tag>)tagDao.findAll();
-        List<com.netcracker.dev3.lomako.beans.test.Test> tests =
-                (List<com.netcracker.dev3.lomako.beans.test.Test>)testDao.findAll();
+        List<com.netcracker.dev3.lomako.beans.Test> tests =
+                (List<com.netcracker.dev3.lomako.beans.Test>)testDao.findAll();
 
         final Tag tag = tags.get(Math.abs(new Random().nextInt() % tags.size()));
-        final com.netcracker.dev3.lomako.beans.test.Test test =
+        final com.netcracker.dev3.lomako.beans.Test test =
                 tests.get(Math.abs(new Random().nextInt() % tests.size()));
 
         TagToTest tagToTest = new TagToTest();

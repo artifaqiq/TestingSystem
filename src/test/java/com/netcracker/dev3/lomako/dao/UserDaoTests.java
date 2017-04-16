@@ -3,10 +3,9 @@
  */
 package com.netcracker.dev3.lomako.dao;
 
-import com.netcracker.dev3.lomako.beans.user.Role;
-import com.netcracker.dev3.lomako.beans.user.User;
-import com.netcracker.dev3.lomako.dao.user.UserDao;
-import com.netcracker.dev3.lomako.dao.user.UserDaoImpl;
+import com.netcracker.dev3.lomako.beans.Role;
+import com.netcracker.dev3.lomako.beans.User;
+import com.netcracker.dev3.lomako.dao.impl.UserDaoImpl;
 import com.netcracker.dev3.lomako.exceptions.dao.PersistException;
 import com.netcracker.dev3.lomako.utils.PasswordCryptography;
 import org.junit.Test;

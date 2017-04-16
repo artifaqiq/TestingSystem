@@ -53,8 +53,8 @@
         <label for="strategy">Strategy:</label>
         <div id="strategy">
             <div class="radio">
-                <label><input ng-model="C.test.strategy" value="1" type="radio" name="optradio">Strict</label><br/>
-                <label><input ng-model="C.test.strategy" value="2" type="radio" name="optradio">Scaled</label>
+                <label><input ng-model="C.test.resultCalculationStrategyWay" value="STRICT" type="radio" name="optradio">Strict</label><br/>
+                <label><input ng-model="C.test.resultCalculationStrategyWay" value="SCALED" type="radio" name="optradio">Scaled</label>
             </div>
         </div>
 
@@ -84,7 +84,7 @@
                 <!-- Points -->
                 <div class="form-group col-sm-3">
                     <label for="points">Points:</label>
-                    <select class="form-control" id="points">
+                    <select ng-model="task.pointsForCorrectAnswer" class="form-control" id="points">
                         <option ng-repeat="x in C.range(100)">{{x}}</option>
                     </select>
                 </div>
@@ -138,6 +138,10 @@
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
         </div>
+
+        <button ng-click="C.service.update()" class="col-sm-12 btn btn-success btn-block">
+            Save
+        </button>
 
         <div>
             <h4>Model</h4>

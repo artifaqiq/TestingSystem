@@ -3,14 +3,11 @@
  */
 package com.netcracker.dev3.lomako.dao;
 
-import com.netcracker.dev3.lomako.beans.test.TestResult;
-import com.netcracker.dev3.lomako.beans.user.User;
-import com.netcracker.dev3.lomako.dao.test.TestDao;
-import com.netcracker.dev3.lomako.dao.test.TestDaoImpl;
-import com.netcracker.dev3.lomako.dao.test.TestResultDao;
-import com.netcracker.dev3.lomako.dao.test.TestResultDaoImpl;
-import com.netcracker.dev3.lomako.dao.user.UserDao;
-import com.netcracker.dev3.lomako.dao.user.UserDaoImpl;
+import com.netcracker.dev3.lomako.beans.TestResult;
+import com.netcracker.dev3.lomako.beans.User;
+import com.netcracker.dev3.lomako.dao.impl.TestDaoImpl;
+import com.netcracker.dev3.lomako.dao.impl.TestResultDaoImpl;
+import com.netcracker.dev3.lomako.dao.impl.UserDaoImpl;
 import com.netcracker.dev3.lomako.exceptions.dao.PersistException;
 import org.junit.Test;
 
@@ -38,8 +35,8 @@ public class TestResultDaoTests {
 
         final int points = new Random().nextInt() % 100;
         final User user = ((List<User>)userDao.findAll()).get(0);
-        final com.netcracker.dev3.lomako.beans.test.Test test =
-                ((List<com.netcracker.dev3.lomako.beans.test.Test>)testDao.findAll()).get(0);
+        final com.netcracker.dev3.lomako.beans.Test test =
+                ((List<com.netcracker.dev3.lomako.beans.Test>)testDao.findAll()).get(0);
 
         TestResult testResult = new TestResult();
         testResult.setPoints(points);
