@@ -13,6 +13,7 @@ public final class JspPath {
     /* Dashboard */
     public static final String MAIN = BASE_PATH + "/dashboard/main.jsp";
     public static final String MY_TESTS = BASE_PATH + "/dashboard/my-tests.jsp";
+    public static final String TAG_CLOUD = BASE_PATH + "/dashboard/tag-cloud.jsp";
 
     /* User */
     public static final String LOGIN = BASE_PATH + "/user/login.jsp";

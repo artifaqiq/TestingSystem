@@ -20,6 +20,7 @@ public enum CommandName {
     UPDATE_TEST,
     READ_TEST_FOR_SOLVE,
     SEND_SOLVED_TEST,
-    SOLVE_TEST
+    SOLVE_TEST,
+    TAG_CLOUD
 
 }

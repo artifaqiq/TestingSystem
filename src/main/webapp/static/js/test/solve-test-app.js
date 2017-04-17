@@ -33,6 +33,8 @@ app.controller('Controller', function ($http) {
     }).then(function (response) {
         console.log(response);
         self.test = response.data;
+        self.orignal = JSON.parse(JSON.stringify(self.test));
+
     }, function (response) {
         console.error(response);
     });
@@ -53,6 +55,26 @@ app.controller('Controller', function ($http) {
     };
 
     self.editing = false;
+
+    self.submit = function () {
+        self.service.submit();
+
+        for(var i = 0; i < self.test.tasks.length; i++) {
+            for(var j = 0; j < self.test.tasks[i].answers.length; j++) {
+                if(self.test.tasks[i].answers[j].isCorrect
+                    === self.orignal.tasks[i].answers[j].isCorrect
+                    && self.test.tasks[i].answers[j].isCorrect === true) {
+                    self.test.tasks[i].answers[j].class = "success";
+
+                } else if (self.test.tasks[i].answers[j].isCorrect
+                    !== self.orignal.tasks[i].answers[j].isCorrect) {
+                    self.test.tasks[i].answers[j].class = "error";
+                }
+            }
+        }
+
+    };
+
 
     self.range = function (n) {
         x = [];

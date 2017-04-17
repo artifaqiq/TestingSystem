@@ -39,19 +39,19 @@
     <div>
         <!-- Name-->
         <div class="form-group">
-            <label for="name">${tr.translate("name")}:</label>
+            <label for="name"><h3><strong>${tr.translate("name")}:</h3></label>
             <input ng-model="C.test.name" type="text" class="form-control" id="name" style="font-size: large">
         </div>
 
         <!-- Description-->
         <div class="form-group">
-            <label for="desctiption">${tr.translate("description")}:</label>
+            <label for="desctiption"><h3><strong>${tr.translate("description")}:</strong></h3></label>
             <textarea ng-model="C.test.description" class="form-control" rows="5" id="desctiption"></textarea>
         </div>
 
         <!-- Tags -->
         <div class="form-group">
-            <label>${tr.translate("tags")}:</label>
+            <label></h3><strong>${tr.translate("tags")}:</strong></h3></label>
             <div ng-repeat="tag in C.test.tags">
                 <div class="col-sm-10">
                     <input ng-model="tag.title" type="text" class="form-control">
@@ -65,7 +65,7 @@
             </div>
 
             <div style="margin-top: 2%">
-                <button ng-click="C.addTag()" type="button" class="btn btn-block btn-success btn-number col-sm-12">
+                <button ng-click="C.addTag()" type="button" style="margin-top: 2%" class="btn btn-block btn-success btn-number col-sm-6">
                     <span>${tr.translate("add_tag")}</span>
                 </button>
 
@@ -74,16 +74,18 @@
         </div>
 
         <!-- Strategy -->
-        <label for="strategy">${tr.translate("strategy")}:</label>
+        <label for="strategy"><h3><strong>${tr.translate("strategy")}:</strong></h3></label>
         <div id="strategy">
             <div class="radio">
-                <label><input ng-model="C.test.resultCalculationStrategyWay" value="STRICT" type="radio" name="optradio">Strict</label><br/>
-                <label><input ng-model="C.test.resultCalculationStrategyWay" value="SCALED" type="radio" name="optradio">Scaled</label>
+                <label><input ng-model="C.test.resultCalculationStrategyWay" value="STRICT" type="radio"
+                              name="optradio">Strict</label><br/>
+                <label><input ng-model="C.test.resultCalculationStrategyWay" value="SCALED" type="radio"
+                              name="optradio">Scaled</label>
             </div>
         </div>
 
         <!-- Tasks -->
-        <label for="tasks">${tr.translate("tasks")}:</label>
+        <label for="tasks"><h3><strong>${tr.translate("tasks")}:</strong></h3></label>
         <div ng-repeat="task in C.test.tasks" id="tasks">
 
             <!-- Task -->
@@ -108,7 +110,8 @@
                 <!-- Points -->
                 <div class="form-group col-sm-3">
                     <label for="points">${tr.translate('points')}:</label>
-                    <select ng-model="task.pointsForCorrectAnswer" class="form-control" id="points">
+                    <select ng-init="task.pointsForCorrectAnswer = task.pointsForCorrectAnswer.toString()"
+                            ng-model="task.pointsForCorrectAnswer" class="form-control" id="points">
                         <option ng-repeat="x in C.range(100)">{{x}}</option>
                     </select>
                 </div>
@@ -162,28 +165,26 @@
             </button>
         </div>
 
-        <button ng-click="C.service.update()" class="col-sm-12 btn btn-success btn-block" style="margin-top: 3%">
-            ${tr.translate('save')}
+        <button ng-click="C.save()" class="col-sm-12 btn {{C.saveButtonClass}} btn-block" style="margin-top: 3%">
+            <h5><strong>${tr.translate('save')}</strong></h5>
         </button>
 
-        <div>
-            <h4>Model</h4>
-            {{C.test}}
-        </div>
     </div>
 
 
 </div>
 
+
 <div class="col-sm-6">
+
     <div class="content-header">
         <h1>${tr.translate("preview")}</h1>
     </div>
-
     <div class="col-sm-12">
         <!-- Name-->
         <div class="page-header">
-            <h2><div>{{C.test.name}}</div>
+            <h2>
+                <div>{{C.test.name}}</div>
                 <small>
                     {{C.test.description}}
                 </small>
@@ -191,7 +192,6 @@
         </div>
 
         <!-- Tasks -->
-        <label for="tasks">${tr.translate("tasks")}:</label>
         <div ng-repeat="task in C.test.tasks">
 
             <!-- Task -->
@@ -199,17 +199,15 @@
 
                 <h3>{{task.text}}</h3>
 
-                <div class="col-sm-12">
-                    <div ng-repeat="answer in task.answers" class="[ form-group ]">
-                        <input type="checkbox" name="fancy-checkbox-default" id="fancy-checkbox-default" autocomplete="off" />
-                        <div class="[ btn-group ] col-sm-12 ">
-                            <label for="fancy-checkbox-default" class="[ btn btn-default ] col-sm-1">
-                                <span class="[ glyphicon glyphicon-ok ]"></span>
-                            </label>
-                            <div class="col-sm-11">
-                                {{answer.text}}
-                            </div>
-                        </div>
+                <div ng-repeat="answer in task.answers">
+                    <div class="checkbox">
+                        <label class="{{answer.class}}">
+                            <input ng-model="answer.isCorrect"
+                                   ng-true-value="true"
+                                   ng-false-value="false"
+                                   type="checkbox">
+                            {{answer.text}}
+                        </label>
                     </div>
                 </div>
 
@@ -218,9 +216,10 @@
 
         </div>
 
-    </div>
-</div>
 
+    </div>
+
+</div>
 
 </div>
 </section>

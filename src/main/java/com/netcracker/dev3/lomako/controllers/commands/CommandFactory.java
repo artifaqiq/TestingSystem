@@ -5,6 +5,7 @@ package com.netcracker.dev3.lomako.controllers.commands;
 
 import com.netcracker.dev3.lomako.controllers.commands.dashboard.MainCommand;
 import com.netcracker.dev3.lomako.controllers.commands.dashboard.MyTestsCommand;
+import com.netcracker.dev3.lomako.controllers.commands.dashboard.TagCloudCommand;
 import com.netcracker.dev3.lomako.controllers.commands.rest.test.crud.CreateTestCommand;
 import com.netcracker.dev3.lomako.controllers.commands.rest.test.crud.DeleteTestCommand;
 import com.netcracker.dev3.lomako.controllers.commands.rest.test.crud.ReadTestCommand;
@@ -71,6 +72,9 @@ public enum CommandFactory  {
                 break;
             case SOLVE_TEST:
                 command = new SolveTestCommand();
+                break;
+            case TAG_CLOUD:
+                command = new TagCloudCommand();
                 break;
             default:
                 throw new IllegalArgumentException();

@@ -38,7 +38,8 @@ public final class AccessControl {
                 CommandName.DELETE_TEST,
                 CommandName.READ_TEST_FOR_SOLVE,
                 CommandName.SEND_SOLVED_TEST,
-                CommandName.SOLVE_TEST
+                CommandName.SOLVE_TEST,
+                CommandName.TAG_CLOUD
         });
 
         roleToCommand.put(Role.ADMIN, new CommandName[] {
@@ -53,7 +54,8 @@ public final class AccessControl {
                 CommandName.DELETE_TEST,
                 CommandName.READ_TEST_FOR_SOLVE,
                 CommandName.SEND_SOLVED_TEST,
-                CommandName.SOLVE_TEST
+                CommandName.SOLVE_TEST,
+                CommandName.TAG_CLOUD
         });
     }
 

@@ -22,6 +22,7 @@
     <link href="/static/css/test/create.css" rel="stylesheet">
 
     <script src="/static/js/test/solve-test-app.js"></script>
+    <link href="/static/css/test/solve.css" rel="stylesheet">
 
 </head>
 
@@ -52,7 +53,7 @@
 
                 <div ng-repeat="answer in task.answers">
                     <div class="checkbox">
-                        <label>
+                        <label class="{{answer.class}}">
                             <input ng-model="answer.isCorrect"
                                    ng-true-value="true"
                                    ng-false-value="false"
@@ -68,20 +69,16 @@
         </div>
 
         <div ng-if="C.points === undefined">
-            <button ng-click="C.service.submit()" class="btn btn-success">
+            <button ng-click="C.submit()" class="btn btn-success">
                 Submit
             </button>
         </div>
-        <div ng-if="C.points !== undefined">
-            Result: {{C.points}}
+        <div ng-if="C.points !== undefined" class="page-header">
+            <h3>Result: {{C.points}}</h3>
         </div>
 
     </div>
 
-    <div>
-        Model:
-        {{C.test}}
-    </div>
 </div>
 
 </section>

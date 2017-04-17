@@ -22,14 +22,14 @@ app.controller('Controller', function ($http) {
     var self = this;
     self.testId = getParameterByName("id");
 
+    self.saveButtonClass = "btn-success";
+
     $http({
         method: 'GET',
         url: '/Controller?command=read_test&id=' + self.testId
     }).then(function (response) {
-        console.log(response);
         self.test = response.data;
     }, function (response) {
-        console.error(response);
     });
 
     self.service = {
@@ -39,7 +39,7 @@ app.controller('Controller', function ($http) {
                 url: '/Controller?command=update_test&id=' + self.testId,
                 data: self.test
             }).then(function (response) {
-                console.log(response);
+                self.saveButtonClass = "btn-success";
             }, function (response) {
                 console.error(response);
             })
@@ -48,12 +48,17 @@ app.controller('Controller', function ($http) {
 
     self.editing = false;
 
+    self.save = function() {
+        self.service.update();
+    };
+
     self.addTag = function () {
 
         self.test.tags.push({
             id: 0,
             text: ""
         })
+        self.saveButtonClass = "btn-warning";
     };
 
     self.addAnswer = function (task) {
@@ -61,6 +66,7 @@ app.controller('Controller', function ($http) {
             title: "",
             isCorrect: false
         })
+        self.saveButtonClass = "btn-warning";
     };
 
     self.addTask = function () {
@@ -75,7 +81,8 @@ app.controller('Controller', function ($http) {
                 }
             ]
         })
-    }
+        self.saveButtonClass = "btn-warning";
+    };
 
     self.range = function (n) {
         x = [];
@@ -89,5 +96,6 @@ app.controller('Controller', function ($http) {
         if (index !== -1) {
             array.splice(index, 1);
         }
+        self.saveButtonClass = "btn-warning";
     };
 });
