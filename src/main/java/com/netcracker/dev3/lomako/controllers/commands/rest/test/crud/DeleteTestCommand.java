@@ -1,9 +1,8 @@
 /**
  * Copyright (c) 2017, Lomako. All rights reserved.
  */
-package com.netcracker.dev3.lomako.controllers.commands.test;
+package com.netcracker.dev3.lomako.controllers.commands.rest.test.crud;
 
-import com.netcracker.dev3.lomako.beans.Test;
 import com.netcracker.dev3.lomako.constants.CommandPath;
 import com.netcracker.dev3.lomako.controllers.commands.Command;
 import com.netcracker.dev3.lomako.services.TestService;

@@ -25,48 +25,51 @@
 <body>
 
 <jsp:include page="/WEB-INF/jsp/templates/menu.jsp"/>
-    <div class="content">
-        <div class="content-header">
-            <h1>Dashboard</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<div class="content">
+    <div class="content-header">
+        <h1>Dashboard</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+    <div class="widget-box sample-widget">
+        <div class="widget-header">
+            <h2>Mathematics</h2>
         </div>
-        <div class="widget-box sample-widget">
-            <div class="widget-header">
-                <h2>Widget Header</h2>
-                <i class="fa fa-cog"></i>
-            </div>
-            <div class="widget-content">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/87118/sample-data-1.png">
-            </div>
+        <div class="widget-content">
+            About mathematics
         </div>
-        <div class="widget-box sample-widget">
-            <div class="widget-header">
-                <h2>Widget Header</h2>
-                <i class="fa fa-cog"></i>
-            </div>
-            <div class="widget-content">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/87118/sample-data-1.png">
-            </div>
+    </div>
+    <div class="widget-box sample-widget">
+        <div class="widget-header">
+            <h2>Mathematics</h2>
+            <a class="fa fa-pencil fa-lg" href="#"></a>
+            <a class="fa fa-trash fa-lg" href="#"></a>
         </div>
-        <div class="widget-box sample-widget">
-            <div class="widget-header">
-                <h2>Widget Header</h2>
-                <i class="fa fa-cog"></i>
-            </div>
-            <div class="widget-content">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/87118/sample-data-1.png">
-            </div>
-        </div>
-        <div class="widget-box sample-widget">
-            <div class="widget-header">
-                <h2>Widget Header</h2>
-                <i class="fa fa-cog"></i>
-            </div>
-            <div class="widget-content">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/87118/sample-data-1.png">
+        <div class="widget-content">
+            <div class="panel">
+                <div class="panel-body">Description</div>
+                <div class="panel-footer"><i>Date</i></div>
             </div>
         </div>
     </div>
+    <div class="widget-box sample-widget">
+        <div class="widget-header">
+            <h2>Widget Header</h2>
+            <i class="fa fa-cog"></i>
+        </div>
+        <div class="widget-content">
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/87118/sample-data-1.png">
+        </div>
+    </div>
+    <div class="widget-box sample-widget">
+        <div class="widget-header">
+            <h2>Widget Header</h2>
+            <i class="fa fa-cog"></i>
+        </div>
+        <div class="widget-content">
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/87118/sample-data-1.png">
+        </div>
+    </div>
+</div>
 </section>
 
 </body>

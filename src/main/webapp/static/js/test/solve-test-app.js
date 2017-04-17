@@ -1,4 +1,7 @@
 /**
+ * Created by Artur Lomako on 4/17/17.
+ */
+/**
  * Created by Artur Lomako on 4/14/17.
  */
 
@@ -22,9 +25,11 @@ app.controller('Controller', function ($http) {
     var self = this;
     self.testId = getParameterByName("id");
 
+    self.points = undefined;
+
     $http({
         method: 'GET',
-        url: '/Controller?command=read_test&id=' + self.testId
+        url: '/Controller?command=read_test_for_solve&id=' + self.testId
     }).then(function (response) {
         console.log(response);
         self.test = response.data;
@@ -33,13 +38,14 @@ app.controller('Controller', function ($http) {
     });
 
     self.service = {
-        update: function () {
+        submit: function () {
             $http({
                 method: 'POST',
-                url: '/Controller?command=update_test&id=' + self.testId,
+                url: '/Controller?command=send_solved_test&id=' + self.testId,
                 data: self.test
             }).then(function (response) {
                 console.log(response);
+                self.points = response.data.points;
             }, function (response) {
                 console.error(response);
             })
@@ -48,35 +54,6 @@ app.controller('Controller', function ($http) {
 
     self.editing = false;
 
-    self.addTag = function () {
-
-        self.test.tags.push({
-            id: 0,
-            text: ""
-        })
-    };
-
-    self.addAnswer = function (task) {
-        task.answers.push({
-            title: "",
-            isCorrect: false
-        })
-    };
-
-    self.addTask = function () {
-        self.test.tasks.push({
-            text: "",
-            points: 0,
-            answers: [
-                {
-                    text: "",
-                    isCorrect: false
-
-                }
-            ]
-        })
-    }
-
     self.range = function (n) {
         x = [];
         for (var i = 0; i < n; i++) {
@@ -84,10 +61,5 @@ app.controller('Controller', function ($http) {
         }
         return x;
     };
-    self.remove = function (array, object) {
-        var index = array.indexOf(object);
-        if (index !== -1) {
-            array.splice(index, 1);
-        }
-    };
+
 });

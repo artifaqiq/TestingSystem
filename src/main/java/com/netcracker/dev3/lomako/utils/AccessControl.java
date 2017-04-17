@@ -4,7 +4,6 @@
 package com.netcracker.dev3.lomako.utils;
 
 import com.netcracker.dev3.lomako.beans.Role;
-import com.netcracker.dev3.lomako.controllers.commands.Command;
 import com.netcracker.dev3.lomako.controllers.commands.CommandName;
 
 import java.util.Arrays;
@@ -36,7 +35,10 @@ public final class AccessControl {
                 CommandName.MY_TESTS,
                 CommandName.CREATE_TEST,
                 CommandName.READ_TEST,
-                CommandName.DELETE_TEST
+                CommandName.DELETE_TEST,
+                CommandName.READ_TEST_FOR_SOLVE,
+                CommandName.SEND_SOLVED_TEST,
+                CommandName.SOLVE_TEST
         });
 
         roleToCommand.put(Role.ADMIN, new CommandName[] {
@@ -48,7 +50,10 @@ public final class AccessControl {
                 CommandName.MY_TESTS,
                 CommandName.CREATE_TEST,
                 CommandName.READ_TEST,
-                CommandName.DELETE_TEST
+                CommandName.DELETE_TEST,
+                CommandName.READ_TEST_FOR_SOLVE,
+                CommandName.SEND_SOLVED_TEST,
+                CommandName.SOLVE_TEST
         });
     }
 

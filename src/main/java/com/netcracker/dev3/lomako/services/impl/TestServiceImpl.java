@@ -1,27 +1,13 @@
-/**
+/*
  * Copyright (c) 2017, Lomako. All rights reserved.
  */
 package com.netcracker.dev3.lomako.services.impl;
 
-import com.netcracker.dev3.lomako.beans.Answer;
-import com.netcracker.dev3.lomako.beans.TagToTest;
-import com.netcracker.dev3.lomako.beans.Tag;
-import com.netcracker.dev3.lomako.beans.Task;
-import com.netcracker.dev3.lomako.beans.ResultCalculationStrategyWay;
-import com.netcracker.dev3.lomako.beans.Test;
-import com.netcracker.dev3.lomako.dao.AnswerDao;
-import com.netcracker.dev3.lomako.dao.impl.AnswerDaoImpl;
-import com.netcracker.dev3.lomako.dao.TagToTestDao;
-import com.netcracker.dev3.lomako.dao.impl.TagToTestDaoImpl;
-import com.netcracker.dev3.lomako.dao.TagDao;
-import com.netcracker.dev3.lomako.dao.impl.TagDaoImpl;
-import com.netcracker.dev3.lomako.dao.TaskDao;
-import com.netcracker.dev3.lomako.dao.impl.TaskDaoImpl;
-import com.netcracker.dev3.lomako.dao.TestDao;
-import com.netcracker.dev3.lomako.dao.impl.TestDaoImpl;
-import com.netcracker.dev3.lomako.dao.UserDao;
-import com.netcracker.dev3.lomako.dao.impl.UserDaoImpl;
+import com.netcracker.dev3.lomako.beans.*;
+import com.netcracker.dev3.lomako.dao.*;
+import com.netcracker.dev3.lomako.dao.impl.*;
 import com.netcracker.dev3.lomako.exceptions.dao.PersistException;
+import com.netcracker.dev3.lomako.exceptions.dao.TagToTestUniqueConflictException;
 import com.netcracker.dev3.lomako.services.TestService;
 
 import java.sql.SQLException;
@@ -62,14 +48,14 @@ public enum TestServiceImpl implements TestService {
             tagToTestDao.save(new TagToTest(tagId, testId));
         }
 
-        for(int i = 0; i < test.getTasks().size(); i++) {
+        for (int i = 0; i < test.getTasks().size(); i++) {
             Task task = test.getTasks().get(i);
             task.setOrder(i);
             task.setTestId(testId);
 
             long taskId = taskDao.save(task);
 
-            for(int j = 0; j < task.getAnswers().size(); j++) {
+            for (int j = 0; j < task.getAnswers().size(); j++) {
                 Answer answer = task.getAnswers().get(j);
                 answer.setOrder(j);
                 answer.setTaskId(taskId);
@@ -82,7 +68,7 @@ public enum TestServiceImpl implements TestService {
     }
 
     @Override
-    public long saveEmpty(long authorId) throws SQLException, PersistException{
+    public long saveEmpty(long authorId) throws SQLException, PersistException {
         Test test = new Test();
         test.setAuthorId(authorId);
         test.setResultCalculationStrategyWay(ResultCalculationStrategyWay.STRICT);
@@ -107,13 +93,13 @@ public enum TestServiceImpl implements TestService {
 
         List<TagToTest> tagToTests = tagToTestDao.findByTestId(testId);
         List<Tag> tags = new ArrayList<>();
-        for (TagToTest tagToTest: tagToTests) {
+        for (TagToTest tagToTest : tagToTests) {
             tags.add(tagDao.findOne(tagToTest.getTagId()));
         }
         test.setTags(tags);
 
         test.setTasks(taskDao.findByTestId(testId));
-        for (Task task: test.getTasks()) {
+        for (Task task : test.getTasks()) {
             task.setAnswers(answerDao.findByTaskId(task.getId()));
         }
 
@@ -123,14 +109,14 @@ public enum TestServiceImpl implements TestService {
     @Override
     public void delete(Test test) throws SQLException {
         List<TagToTest> tagToTests = tagToTestDao.findByTestId(test.getId());
-        for (TagToTest tagToTest: tagToTests) {
+        for (TagToTest tagToTest : tagToTests) {
             tagToTestDao.delete(tagToTest);
         }
 
         List<Task> tasks = taskDao.findByTestId(test.getId());
-        for (Task task: tasks) {
+        for (Task task : tasks) {
             List<Answer> answers = answerDao.findByTaskId(task.getId());
-            for (Answer answer: answers) {
+            for (Answer answer : answers) {
                 answerDao.delete(answer);
             }
 
@@ -145,14 +131,14 @@ public enum TestServiceImpl implements TestService {
         testDao.update(test);
 
         List<TagToTest> tagToTests = tagToTestDao.findByTestId(test.getId());
-        for (TagToTest tagToTest: tagToTests) {
+        for (TagToTest tagToTest : tagToTests) {
             tagToTestDao.delete(tagToTest);
         }
 
         List<Task> tasks = taskDao.findByTestId(test.getId());
-        for (Task task: tasks) {
+        for (Task task : tasks) {
             List<Answer> answers = answerDao.findByTaskId(task.getId());
-            for (Answer answer: answers) {
+            for (Answer answer : answers) {
                 answerDao.delete(answer);
             }
 
@@ -163,25 +149,27 @@ public enum TestServiceImpl implements TestService {
             Tag tag = test.getTags().get(i);
 
             Tag findedTag = tagDao.findByTitle(tag.getTitle());
-            if (findedTag == null) {
-                tag.setId(tagDao.save(tag));
-            } else {
-                tag = findedTag;
+            try {
+                if (findedTag == null) {
+
+                    tag.setId(tagDao.save(tag));
+                    tagToTestDao.save(new TagToTest(tag.getId(), test.getId()));
+                } else {
+                    tagToTestDao.save(new TagToTest(findedTag.getId(), test.getId()));
+                }
+            } catch (TagToTestUniqueConflictException e) {
             }
 
-            long tagId = tag.getId();
-
-            tagToTestDao.save(new TagToTest(tagId, test.getId()));
         }
 
-        for(int i = 0; i < test.getTasks().size(); i++) {
+        for (int i = 0; i < test.getTasks().size(); i++) {
             Task task = test.getTasks().get(i);
             task.setOrder(i);
             task.setTestId(test.getId());
 
             long taskId = taskDao.save(task);
 
-            for(int j = 0; j < task.getAnswers().size(); j++) {
+            for (int j = 0; j < task.getAnswers().size(); j++) {
                 Answer answer = task.getAnswers().get(j);
                 answer.setOrder(j);
                 answer.setTaskId(taskId);
@@ -193,6 +181,8 @@ public enum TestServiceImpl implements TestService {
 
     }
 
-    public static TestService getInstance() { return INSTANCE; }
+    public static TestService getInstance() {
+        return INSTANCE;
+    }
 
 }

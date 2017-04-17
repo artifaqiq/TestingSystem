@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2017, Lomako. All rights reserved.
  */
-package com.netcracker.dev3.lomako.controllers.commands.test;
+package com.netcracker.dev3.lomako.controllers.commands.rest.test.crud;
 
 import com.google.gson.Gson;
 import com.netcracker.dev3.lomako.beans.Test;
@@ -17,7 +17,10 @@ import java.io.PrintWriter;
  * @author Lomako
  * @version 1.0
  */
+@SuppressWarnings("Duplicates")
 public class ReadTestCommand extends Command {
+
+    private static final TestService testService = TestServiceImpl.getInstance();
 
     @Override
     protected void executeGet(HttpServletRequest req, HttpServletResponse resp) throws Exception {
@@ -28,10 +31,10 @@ public class ReadTestCommand extends Command {
             send404(resp);
             return;
         } else {
+            //TODO catch NumberFormat
             testId = Long.valueOf(req.getParameter("id"));
         }
 
-        TestService testService = TestServiceImpl.getInstance();
         Test test = testService.findById(testId);
 
         if (test == null) {
@@ -85,4 +88,5 @@ public class ReadTestCommand extends Command {
             this.status = status;
         }
     }
+
 }

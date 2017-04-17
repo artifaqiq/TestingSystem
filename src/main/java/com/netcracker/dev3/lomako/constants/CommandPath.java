@@ -20,4 +20,8 @@ public final class CommandPath {
     public static final String READ_TEST = "/Controller?command=read_test";
     public static final String UPDATE_TEST = "/Controller?command=update_test";
     public static final String DELETE_TEST = "/Controller?command=delete_test";
+
+    public static final String READ_TEST_FOR_SOLVE = "/Controller?command=read_test_for_solve";
+    public static final String SEND_SOLVED_TEST = "/Controller?command=send_solved_test";
+    public static final String SOLVE_TEST = "/Controller?command=solve_test";
 }

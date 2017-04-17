@@ -17,6 +17,9 @@ public enum CommandName {
     CREATE_TEST,
     READ_TEST,
     DELETE_TEST,
-    UPDATE_TEST
+    UPDATE_TEST,
+    READ_TEST_FOR_SOLVE,
+    SEND_SOLVED_TEST,
+    SOLVE_TEST
 
 }

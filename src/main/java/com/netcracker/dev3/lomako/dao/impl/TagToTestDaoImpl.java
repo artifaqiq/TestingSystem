@@ -148,7 +148,7 @@ public enum  TagToTestDaoImpl implements TagToTestDao {
 
             ResultSet resultSet = existsById.executeQuery();
             resultSet.next();
-            return resultSet.getLong(1) == 1;
+            return resultSet.next();
 
         } catch (SQLException e) {
             Logger.getInstance().error(

@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Dashboard</title>
+    <title>${tr.translate("task_editing")}</title>
 
     <jsp:include page="/WEB-INF/jsp/templates/head.jsp"/>
 
@@ -33,24 +33,48 @@
 
 <div class="col-sm-6">
     <div class="content-header">
-        <h1>Edit</h1>
+        <h1>${tr.translate("edit")}</h1>
     </div>
 
     <div>
         <!-- Name-->
         <div class="form-group">
-            <label for="name">Name:</label>
+            <label for="name">${tr.translate("name")}:</label>
             <input ng-model="C.test.name" type="text" class="form-control" id="name" style="font-size: large">
         </div>
 
         <!-- Description-->
         <div class="form-group">
-            <label for="desctiption">Descrtiption:</label>
+            <label for="desctiption">${tr.translate("description")}:</label>
             <textarea ng-model="C.test.description" class="form-control" rows="5" id="desctiption"></textarea>
         </div>
 
+        <!-- Tags -->
+        <div class="form-group">
+            <label>${tr.translate("tags")}:</label>
+            <div ng-repeat="tag in C.test.tags">
+                <div class="col-sm-10">
+                    <input ng-model="tag.title" type="text" class="form-control">
+                </div>
+                <div class="col-sm-2">
+                    <button ng-click="C.remove(C.test.tags, tag)" type="button"
+                            class="btn btn-danger btn-number ">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+            </div>
+
+            <div style="margin-top: 2%">
+                <button ng-click="C.addTag()" type="button" class="btn btn-block btn-success btn-number col-sm-12">
+                    <span>${tr.translate("add_tag")}</span>
+                </button>
+
+            </div>
+
+        </div>
+
         <!-- Strategy -->
-        <label for="strategy">Strategy:</label>
+        <label for="strategy">${tr.translate("strategy")}:</label>
         <div id="strategy">
             <div class="radio">
                 <label><input ng-model="C.test.resultCalculationStrategyWay" value="STRICT" type="radio" name="optradio">Strict</label><br/>
@@ -59,14 +83,14 @@
         </div>
 
         <!-- Tasks -->
-        <label for="tasks">Tasks:</label>
+        <label for="tasks">${tr.translate("tasks")}:</label>
         <div ng-repeat="task in C.test.tasks" id="tasks">
 
             <!-- Task -->
             <div class="well col-sm-12">
 
                 <!-- Name-->
-                <label class="col-sm-12">Text</label>
+                <label class="col-sm-12">${tr.translate("text")}</label>
                 <!-- Text -->
                 <div class="col-sm-10">
                     <textarea ng-model="task.text" type="text" rows="5" class="form-control"></textarea>
@@ -83,7 +107,7 @@
 
                 <!-- Points -->
                 <div class="form-group col-sm-3">
-                    <label for="points">Points:</label>
+                    <label for="points">${tr.translate('points')}:</label>
                     <select ng-model="task.pointsForCorrectAnswer" class="form-control" id="points">
                         <option ng-repeat="x in C.range(100)">{{x}}</option>
                     </select>
@@ -91,7 +115,7 @@
 
                 <!-- Answers -->
                 <div class="col-sm-12">
-                    <label for="answers">Answers:</label>
+                    <label for="answers">${tr.translate('answers')}:</label>
                     <div ng-repeat="answer in task.answers" id="answers" class="col-sm-12">
 
                         <!-- Answer -->
@@ -117,9 +141,8 @@
                     </div>
                 </div>
                 <div class="col-sm-6 col-sm-offset-3" style="margin-top: 2%">
-                    <button ng-click="C.addAnswer(task)" type="button" class="btn btn-block btn-success btn-number"
-                            data-type="plus" data-field="quant[2]">
-                        <span class="glyphicon glyphicon-plus"></span>
+                    <button ng-click="C.addAnswer(task)" type="button" class="btn btn-block btn-success btn-number">
+                        <span>${tr.translate('add_answer')}</span>
                     </button>
                 </div>
 
@@ -135,12 +158,12 @@
         <div class="col-sm-12">
             <button ng-click="C.addTask()" type="button" class="btn btn-success btn-block btn-number" data-type="plus"
                     data-field="quant[2]">
-                <span class="glyphicon glyphicon-plus"></span>
+                <span>${tr.translate("add_task")}</span>
             </button>
         </div>
 
-        <button ng-click="C.service.update()" class="col-sm-12 btn btn-success btn-block">
-            Save
+        <button ng-click="C.service.update()" class="col-sm-12 btn btn-success btn-block" style="margin-top: 3%">
+            ${tr.translate('save')}
         </button>
 
         <div>
@@ -154,7 +177,7 @@
 
 <div class="col-sm-6">
     <div class="content-header">
-        <h1>Preview</h1>
+        <h1>${tr.translate("preview")}</h1>
     </div>
 
     <div class="col-sm-12">
@@ -168,7 +191,7 @@
         </div>
 
         <!-- Tasks -->
-        <label for="tasks">Tasks:</label>
+        <label for="tasks">${tr.translate("tasks")}:</label>
         <div ng-repeat="task in C.test.tasks">
 
             <!-- Task -->

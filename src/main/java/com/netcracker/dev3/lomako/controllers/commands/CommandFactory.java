@@ -3,12 +3,19 @@
  */
 package com.netcracker.dev3.lomako.controllers.commands;
 
-import com.netcracker.dev3.lomako.controllers.commands.test.*;
-import com.netcracker.dev3.lomako.controllers.commands.user.LoginCommand;
 import com.netcracker.dev3.lomako.controllers.commands.dashboard.MainCommand;
 import com.netcracker.dev3.lomako.controllers.commands.dashboard.MyTestsCommand;
-import com.netcracker.dev3.lomako.controllers.commands.user.RegisterCommand;
+import com.netcracker.dev3.lomako.controllers.commands.rest.test.crud.CreateTestCommand;
+import com.netcracker.dev3.lomako.controllers.commands.rest.test.crud.DeleteTestCommand;
+import com.netcracker.dev3.lomako.controllers.commands.rest.test.crud.ReadTestCommand;
+import com.netcracker.dev3.lomako.controllers.commands.rest.test.crud.UpdateTestCommand;
+import com.netcracker.dev3.lomako.controllers.commands.rest.test.solve.ReadTestForSolveCommand;
+import com.netcracker.dev3.lomako.controllers.commands.rest.test.solve.SendSolvedTestCommand;
+import com.netcracker.dev3.lomako.controllers.commands.test.EditTestCommand;
+import com.netcracker.dev3.lomako.controllers.commands.test.SolveTestCommand;
 import com.netcracker.dev3.lomako.controllers.commands.user.LogOutCommand;
+import com.netcracker.dev3.lomako.controllers.commands.user.LoginCommand;
+import com.netcracker.dev3.lomako.controllers.commands.user.RegisterCommand;
 
 /**
  * @author Lomako
@@ -55,6 +62,15 @@ public enum CommandFactory  {
                 break;
             case DELETE_TEST:
                 command = new DeleteTestCommand();
+                break;
+            case SEND_SOLVED_TEST:
+                command = new SendSolvedTestCommand();
+                break;
+            case READ_TEST_FOR_SOLVE:
+                command = new ReadTestForSolveCommand();
+                break;
+            case SOLVE_TEST:
+                command = new SolveTestCommand();
                 break;
             default:
                 throw new IllegalArgumentException();

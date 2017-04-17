@@ -279,7 +279,15 @@ div.user-image {
     display: inline-block;
 }
 .sample-widget {max-width: 47%;}
-.widget-box .fa-cog {
+
+.widget-box .fa-trash {
+    float: right;
+    color: #fff;
+    margin: 11px 11px 0 0;
+    font-size: 20px;
+}
+
+.widget-box .fa-pencil {
     float: right;
     color: #fff;
     margin: 11px 11px 0 0;

@@ -20,9 +20,11 @@ public final class JspPath {
 
     /* Test */
     public static final String EDIT_TEST = BASE_PATH + "/test/edit.jsp";
+    public static final String SOLVE_TEST = BASE_PATH + "/test/solve-test.jsp";
 
     /* Error */
     public static final String ERROR_500 = BASE_PATH + "/error/500.jsp";
     public static final String ERROR_403 = BASE_PATH + "/error/403.jsp";
+
 
 }

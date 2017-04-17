@@ -18,6 +18,7 @@ public final class EditTestCommand extends Command {
     @Override
     protected void executeGet(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 
+        req.setAttribute("tr", translator);
         req.getRequestDispatcher(JspPath.EDIT_TEST).forward(req, resp);
     }
 

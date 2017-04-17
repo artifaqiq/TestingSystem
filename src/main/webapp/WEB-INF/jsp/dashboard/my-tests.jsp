@@ -24,30 +24,39 @@
 <body>
 <jsp:include page="/WEB-INF/jsp/templates/menu.jsp"/>
 
-<div style="padding: 2%">
+<div class="content">
 
-    <c:choose>
-        <c:when test="${testCount == 0}">
-            <p>You have not tests</p>
-        </c:when>
-        <c:otherwise>
+    <div style="padding: 2%">
 
-            <c:forEach var="i" begin="0" end="${testCount - 1}">
-                <div class="panel panel-default col-sm-6">
-                    <div class="panel-heading">
-                        <div style="display: inline-block" class="text-left"><strong>${tests[i].name}</strong></div>
-                        <div style="display: inline-block" class="pull-right"><a
-                                href="<%= CommandPath.DELETE_TEST %>&id=${tests[i].id}">Delete</a></div>
-                        <div style="display: inline-block" class="pull-right"><a
-                                href="<%= CommandPath.EDIT_TEST %>&id=${tests[i].id}">Edit  </a></div>
-
-                    </div>
-                    <div class="panel-body">${tests[i].description}</div>
-                    <div class="panel-footer"><i>${tests[i].created}</i></div>
+        <c:choose>
+            <c:when test="${testCount == 0}">
+                <div class="content-header">
+                    <p>You have no tests</p>
                 </div>
-            </c:forEach>
-        </c:otherwise>
-    </c:choose>
+            </c:when>
+            <c:otherwise>
+
+                <c:forEach var="i" begin="0" end="${testCount - 1}">
+
+                    <div class="widget-box sample-widget">
+                        <div class="widget-header">
+                            <a href="<%= CommandPath.SOLVE_TEST %>&id=${tests[i].id}"><h2>${tests[i].name}</h2></a>
+                            <a class="fa fa-pencil fa-lg" href="<%= CommandPath.EDIT_TEST %>&id=${tests[i].id}"></a>
+                            <a class="fa fa-trash fa-lg" href="<%= CommandPath.DELETE_TEST %>&id=${tests[i].id}"></a>
+                        </div>
+                        <div class="widget-content">
+                            <div class="panel">
+                                <div class="panel-body">${tests[i].description}</div>
+                                <div class="panel-footer"><i>${tests[i].created}</i></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </c:forEach>
+            </c:otherwise>
+        </c:choose>
+
+    </div>
 
     <div class="col-sm-6 col-sm-offset-3">
         <form action="<%= CommandPath.CREATE_TEST %>" method="post">
