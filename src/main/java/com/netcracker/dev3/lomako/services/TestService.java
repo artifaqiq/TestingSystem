@@ -20,4 +20,5 @@ public interface TestService {
     Test findById(long testId) throws SQLException;
     void delete(Test test) throws SQLException;
     void update(Test test) throws SQLException, PersistException;
+    List<Test> findAll() throws SQLException;
 }

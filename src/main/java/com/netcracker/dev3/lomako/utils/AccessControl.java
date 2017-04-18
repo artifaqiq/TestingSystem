@@ -30,7 +30,6 @@ public final class AccessControl {
                 CommandName.LOGIN,
                 CommandName.REGISTER,
                 CommandName.LOGOUT,
-                CommandName.MAIN,
                 CommandName.EDIT_TEST,
                 CommandName.MY_TESTS,
                 CommandName.CREATE_TEST,
@@ -39,14 +38,14 @@ public final class AccessControl {
                 CommandName.READ_TEST_FOR_SOLVE,
                 CommandName.SEND_SOLVED_TEST,
                 CommandName.SOLVE_TEST,
-                CommandName.TAG_CLOUD
+                CommandName.TAG_CLOUD,
+
         });
 
         roleToCommand.put(Role.ADMIN, new CommandName[] {
                 CommandName.LOGIN,
                 CommandName.REGISTER,
                 CommandName.LOGOUT,
-                CommandName.MAIN,
                 CommandName.EDIT_TEST,
                 CommandName.MY_TESTS,
                 CommandName.CREATE_TEST,

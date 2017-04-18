@@ -15,4 +15,8 @@ public interface TagToTestDao extends Dao<TagToTest, Void> {
     boolean exists(long tagId, long testId);
 
     List<TagToTest> findByTestId(long testId);
+
+    List<TagToTest> findByTagId(long tagId);
+
+
 }

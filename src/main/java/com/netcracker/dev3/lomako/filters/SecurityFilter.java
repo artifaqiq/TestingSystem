@@ -37,7 +37,7 @@ public class SecurityFilter implements Filter {
         translator = new Translator(I10nResource.USER, locale);
         request.setAttribute("tr", translator);
 
-        request.getSession().setAttribute("id", 44L);
+        request.getSession().setAttribute("id", 110L);
 
 //        String commandString = request.getParameter("command");
 //        CommandName commandName = null;

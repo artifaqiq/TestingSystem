@@ -14,6 +14,7 @@ import com.netcracker.dev3.lomako.services.UserService;
 import com.netcracker.dev3.lomako.utils.PasswordCryptography;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author Lomako
@@ -60,6 +61,12 @@ public enum  UserServiceImpl implements UserService {
         return user;
 
     }
+
+    @Override
+    public List<User> findAll() throws SQLException {
+        return (List<User>)userDao.findAll();
+    }
+
 
     public static UserService getInstance() { return INSTANCE; }
 }

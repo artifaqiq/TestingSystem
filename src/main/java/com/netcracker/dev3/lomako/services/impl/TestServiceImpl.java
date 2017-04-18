@@ -81,7 +81,18 @@ public enum TestServiceImpl implements TestService {
 
     @Override
     public List<Test> findByUserId(long userId) throws SQLException {
-        return testDao.findByUserId(userId);
+        List<Test> tests = (List<Test>)testDao.findByUserId(userId);
+
+        for(Test test: tests) {
+            List<TagToTest> tagToTests = (List<TagToTest>)tagToTestDao.findByTestId(test.getId());
+            List<Tag> tags = new ArrayList<>();
+            for(TagToTest tagToTest: tagToTests) {
+                tags.add(tagDao.findOne(tagToTest.getTagId()));
+            }
+            test.setTags(tags);
+        }
+
+        return tests;
     }
 
     @Override
@@ -179,6 +190,22 @@ public enum TestServiceImpl implements TestService {
         }
 
 
+    }
+
+    @Override
+    public List<Test> findAll() throws SQLException {
+        List<Test> tests = (List<Test>)testDao.findAll();
+
+        for(Test test: tests) {
+            List<TagToTest> tagToTests = (List<TagToTest>)tagToTestDao.findByTestId(test.getId());
+            List<Tag> tags = new ArrayList<>();
+            for(TagToTest tagToTest: tagToTests) {
+                tags.add(tagDao.findOne(tagToTest.getTagId()));
+            }
+            test.setTags(tags);
+        }
+
+        return tests;
     }
 
     public static TestService getInstance() {

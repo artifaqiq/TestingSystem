@@ -46,6 +46,10 @@ app.controller('Controller', function ($http) {
         }
     };
 
+    self.change = function () {
+        self.saveButtonClass = "btn-warning";
+    };
+
     self.editing = false;
 
     self.save = function() {
@@ -57,7 +61,7 @@ app.controller('Controller', function ($http) {
         self.test.tags.push({
             id: 0,
             text: ""
-        })
+        });
         self.saveButtonClass = "btn-warning";
     };
 

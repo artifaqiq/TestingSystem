@@ -11,7 +11,6 @@ public enum CommandName {
     LOGIN,
     LOGOUT,
     REGISTER,
-    MAIN,
     EDIT_TEST,
     MY_TESTS,
     CREATE_TEST,
@@ -21,6 +20,12 @@ public enum CommandName {
     READ_TEST_FOR_SOLVE,
     SEND_SOLVED_TEST,
     SOLVE_TEST,
-    TAG_CLOUD
+    TAG_CLOUD,
+    ALL_TESTS,
+    TESTS_BY_TAG,
+    TEST_RESULTS_BY_TEST,
+    TEST_RESULTS_BY_USER,
+    ALL_USERS,
+    SET_LOCALE
 
 }

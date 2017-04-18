@@ -40,7 +40,10 @@ public enum TestResultDaoImpl implements TestResultDao {
             "SELECT id, points, user_id, test_id FROM test_results WHERE id = ?";
 
     private static final String SELECT_ALL_TEST_RESULTS_SQL =
-            "SELECT id, points, user_id, test_id FROM test_results;";
+            "SELECT id, points, user_id, test_id FROM test_results";
+
+    private static final String SELECT_TEST_RESULTS_BY_USER_ID_SQL =
+            "SELECT id, points, user_id, test_id FROM test_results WHERE user_id = ?";
 
     private static final String COUNT_ALL_TEST_RESULTS_SQL =
             "SELECT COUNT(*) FROM test_results";
@@ -50,6 +53,9 @@ public enum TestResultDaoImpl implements TestResultDao {
 
     private static final String SELECT_LAST_INSERT_ID_SQL =
             "SELECT LAST_INSERT_ID() FROM test_results LIMIT 1";
+
+    private static final String SELECT_TEST_RESULTS_BY_TEST_ID_SQL =
+            "SELECT id, points, user_id, test_id FROM test_results WHERE test_id = ?";
 
     @Override
     public synchronized <S extends TestResult> long save(S entity) throws SQLException, PersistException {
@@ -215,7 +221,70 @@ public enum TestResultDaoImpl implements TestResultDao {
         }
     }
 
+
+
     public static TestResultDao getInstance() {
         return INSTANCE;
+    }
+
+    @Override
+    public List<TestResult> findByUserId(long userId) {
+        List<TestResult> testResults = new ArrayList<>();
+
+        try(Connection connection = connectionPool.getConnection()) {
+            PreparedStatement selectAll = connection.prepareStatement(SELECT_TEST_RESULTS_BY_USER_ID_SQL);
+            selectAll.setLong(1, userId);
+
+            ResultSet resultSet = selectAll.executeQuery();
+
+
+            while (resultSet.next()) {
+                TestResult testResult = new TestResult();
+
+                testResult.setId(resultSet.getLong(1));
+                testResult.setPoints(resultSet.getInt(2));
+                testResult.setUserId(resultSet.getLong(3));
+                testResult.setTestId(resultSet.getLong(4));
+
+                testResults.add(testResult);
+            }
+
+        } catch (SQLException e) {
+            Logger.getInstance().error(
+                    this.getClass(), e.getMessage());
+            return null;
+        }
+
+        return testResults;
+    }
+
+    @Override
+    public List<TestResult> findByTestId(long testId) {
+        List<TestResult> testResults = new ArrayList<>();
+
+        try(Connection connection = connectionPool.getConnection()) {
+            PreparedStatement selectAll = connection.prepareStatement(SELECT_TEST_RESULTS_BY_TEST_ID_SQL);
+            selectAll.setLong(1, testId);
+
+            ResultSet resultSet = selectAll.executeQuery();
+
+            while (resultSet.next()) {
+                TestResult testResult = new TestResult();
+
+                testResult.setId(resultSet.getLong(1));
+                testResult.setPoints(resultSet.getInt(2));
+                testResult.setUserId(resultSet.getLong(3));
+                testResult.setTestId(resultSet.getLong(4));
+
+                testResults.add(testResult);
+            }
+
+        } catch (SQLException e) {
+            Logger.getInstance().error(
+                    this.getClass(), e.getMessage());
+            return null;
+        }
+
+        return testResults;
     }
 }

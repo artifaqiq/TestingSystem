@@ -3,11 +3,16 @@
  */
 package com.netcracker.dev3.lomako.beans;
 
+import java.io.Serializable;
+
 /**
  * @author Lomako
  * @version 1.0
  */
-public class TestResult {
+public class TestResult implements Serializable {
+
+    private static final long serialVersionUID = 2119487206353310835L;
+
     private long id;
 
     private long testId;
@@ -16,13 +21,20 @@ public class TestResult {
 
     private int points;
 
-    public TestResult() { }
+    private User user;
 
-    public TestResult(long id, long testId, long userId, int points) {
+    private Test test;
+
+    public TestResult() {
+    }
+
+    public TestResult(long id, long testId, long userId, int points, User user, Test test) {
         this.id = id;
         this.testId = testId;
         this.userId = userId;
         this.points = points;
+        this.user = user;
+        this.test = test;
     }
 
     public long getId() {
@@ -57,6 +69,22 @@ public class TestResult {
         this.points = points;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Test getTest() {
+        return test;
+    }
+
+    public void setTest(Test test) {
+        this.test = test;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -67,7 +95,9 @@ public class TestResult {
         if (id != that.id) return false;
         if (testId != that.testId) return false;
         if (userId != that.userId) return false;
-        return points == that.points;
+        if (points != that.points) return false;
+        if (user != null ? !user.equals(that.user) : that.user != null) return false;
+        return test != null ? test.equals(that.test) : that.test == null;
     }
 
     @Override
@@ -76,6 +106,8 @@ public class TestResult {
         result = 31 * result + (int) (testId ^ (testId >>> 32));
         result = 31 * result + (int) (userId ^ (userId >>> 32));
         result = 31 * result + points;
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (test != null ? test.hashCode() : 0);
         return result;
     }
 
@@ -86,6 +118,8 @@ public class TestResult {
                 ", testId=" + testId +
                 ", userId=" + userId +
                 ", points=" + points +
+                ", user=" + user +
+                ", test=" + test +
                 '}';
     }
 }

@@ -3,9 +3,10 @@
  */
 package com.netcracker.dev3.lomako.controllers;
 
+import com.netcracker.dev3.lomako.constants.CommandPath;
 import com.netcracker.dev3.lomako.controllers.commands.Command;
-import com.netcracker.dev3.lomako.controllers.commands.CommandName;
 import com.netcracker.dev3.lomako.controllers.commands.CommandFactory;
+import com.netcracker.dev3.lomako.controllers.commands.CommandName;
 import com.netcracker.dev3.lomako.utils.Logger;
 
 import javax.servlet.ServletException;
@@ -43,11 +44,19 @@ public class Controller extends HttpServlet {
             System.out.println(req.getSession().getAttribute(key));
         }
 
-        CommandName commandName = CommandName.valueOf(req.getParameter("command").toUpperCase());
-        Command command = CommandFactory.getInstance().getCommand(commandName);
-
         try {
+            String commandNameString = req.getParameter("command");
+            if (commandNameString == null) {
+                resp.sendRedirect(CommandPath.TAG_CLOUD);
+            }
+
+            CommandName commandName = CommandName.valueOf(commandNameString.toUpperCase());
+            Command command = CommandFactory.getInstance().getCommand(commandName);
+
             command.execute(req, resp);
+        } catch (IllegalArgumentException e) {
+            resp.sendRedirect(CommandPath.TAG_CLOUD);
+
         } catch (Exception e) {
             e.printStackTrace();
             Logger.getInstance().fatal(this.getClass(), e.getMessage());

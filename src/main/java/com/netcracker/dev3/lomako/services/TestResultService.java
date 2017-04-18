@@ -8,6 +8,7 @@ import com.netcracker.dev3.lomako.beans.TestResult;
 import com.netcracker.dev3.lomako.exceptions.dao.PersistException;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author Lomako
@@ -15,4 +16,8 @@ import java.sql.SQLException;
  */
 public interface TestResultService {
     TestResult solveTest(Test original, Test solved, long userId) throws SQLException, PersistException;
+
+    List<TestResult> findByUserId(long userId) throws SQLException;
+
+    List<TestResult> findByTestId(long testId) throws SQLException;
 }

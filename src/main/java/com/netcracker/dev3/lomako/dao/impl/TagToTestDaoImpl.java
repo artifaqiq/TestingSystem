@@ -47,6 +47,9 @@ public enum  TagToTestDaoImpl implements TagToTestDao {
     private static final String SELECT_TAG_TO_TEST_BY_TEST_ID_SQL =
             "SELECT tag_id, test_id FROM m2m_tag_test WHERE test_id = ?";
 
+    private static final String SELECT_TAG_TO_TEST_BY_TAG_ID_SQL =
+            "SELECT tag_id, test_id FROM m2m_tag_test WHERE tag_id = ?";
+
     @Override
     public <S extends TagToTest> long save(S entity) throws SQLException, PersistException {
         try (Connection connection = connectionPool.getConnection()) {
@@ -164,6 +167,34 @@ public enum  TagToTestDaoImpl implements TagToTestDao {
         try(Connection connection = connectionPool.getConnection()) {
             PreparedStatement selectAll = connection.prepareStatement(SELECT_TAG_TO_TEST_BY_TEST_ID_SQL);
             selectAll.setLong(1, testId);
+
+            ResultSet resultSet = selectAll.executeQuery();
+
+            while (resultSet.next()) {
+                TagToTest tagToTest = new TagToTest();
+
+                tagToTest.setTagId(resultSet.getLong(1));
+                tagToTest.setTestId(resultSet.getLong(2));
+
+                tagToTests.add(tagToTest);
+            }
+
+        } catch (SQLException e) {
+            Logger.getInstance().error(
+                    this.getClass(), e.getMessage());
+            return null;
+        }
+
+        return tagToTests;
+    }
+
+    @Override
+    public List<TagToTest> findByTagId(long tagId) {
+        List<TagToTest> tagToTests = new ArrayList<>();
+
+        try(Connection connection = connectionPool.getConnection()) {
+            PreparedStatement selectAll = connection.prepareStatement(SELECT_TAG_TO_TEST_BY_TAG_ID_SQL);
+            selectAll.setLong(1, tagId);
 
             ResultSet resultSet = selectAll.executeQuery();
 

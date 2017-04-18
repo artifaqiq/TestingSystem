@@ -8,6 +8,7 @@ import com.netcracker.dev3.lomako.exceptions.dao.UserEmailUniqueConflictExceptio
 import com.netcracker.dev3.lomako.exceptions.service.UserNotFoundException;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author Lomako
@@ -18,4 +19,6 @@ public interface UserService {
 
     User register(String email, String password, String firstName, String lastName)
             throws SQLException, UserEmailUniqueConflictException;
+
+    List<User> findAll() throws SQLException;
 }
